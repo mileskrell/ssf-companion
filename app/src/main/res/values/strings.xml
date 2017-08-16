@@ -6,7 +6,5 @@
 
     <string name="student_science_fair_logo">Student Science Fair logo</string>
     <string name="ssf_date">March 15 - March 18, 2018</string>
-
-    <string name="about_our_sponsors">About our sponsors</string>
     <string name="sponsor_message">The CPS Student Science Fair is made possible by a number of sponsors.\n\nTap a sponsor\'s logo to learn more about them.</string>
 </resources>
