@@ -45,6 +45,24 @@ public class NavDrawerActivity extends AppCompatActivity
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        switch(item.getItemId()) {
+            case R.id.nav_send_feedback:
+                Intent sendFeedbackIntent = new Intent(Intent.ACTION_SENDTO,
+                        Uri.parse("mailto:" + getString(R.string.my_email_address)));
+                sendFeedbackIntent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.app_name));
+                if (sendFeedbackIntent.resolveActivity(getPackageManager()) != null) {
+                    startActivity(sendFeedbackIntent);
+                }
+                break;
+            case R.id.nav_view_the_code:
+                Intent viewTheCodeIntent = new Intent(Intent.ACTION_VIEW,
+                        Uri.parse(getString(R.string.app_github_url)));
+                if (viewTheCodeIntent.resolveActivity(getPackageManager()) != null) {
+                    startActivity(viewTheCodeIntent);
+                }
+                break;
+        }
+
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
