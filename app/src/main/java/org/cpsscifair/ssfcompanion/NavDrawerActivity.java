@@ -12,6 +12,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 public class NavDrawerActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -50,16 +51,11 @@ public class NavDrawerActivity extends AppCompatActivity
                 Intent sendFeedbackIntent = new Intent(Intent.ACTION_SENDTO,
                         Uri.parse("mailto:" + getString(R.string.my_email_address)));
                 sendFeedbackIntent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.app_name));
-                if (sendFeedbackIntent.resolveActivity(getPackageManager()) != null) {
-                    startActivity(sendFeedbackIntent);
-                }
+                safelyInvokeIntent(sendFeedbackIntent);
                 break;
             case R.id.nav_view_the_code:
-                Intent viewTheCodeIntent = new Intent(Intent.ACTION_VIEW,
-                        Uri.parse(getString(R.string.app_github_url)));
-                if (viewTheCodeIntent.resolveActivity(getPackageManager()) != null) {
-                    startActivity(viewTheCodeIntent);
-                }
+                safelyInvokeIntent(new Intent(Intent.ACTION_VIEW,
+                        Uri.parse(getString(R.string.app_github_url))));
                 break;
         }
 
@@ -69,34 +65,42 @@ public class NavDrawerActivity extends AppCompatActivity
     }
 
     public void viewSsfIncSite(View view) {
-        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://cpsstudentsciencefair.squarespace.com/")));
+        safelyInvokeIntent(new Intent(Intent.ACTION_VIEW, Uri.parse("https://cpsstudentsciencefair.squarespace.com/")));
     }
 
     public void viewCpsSite(View view) {
-        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://cps.edu/")));
+        safelyInvokeIntent(new Intent(Intent.ACTION_VIEW, Uri.parse("http://cps.edu/")));
     }
 
     public void viewMsiSite(View view) {
-        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.msichicago.org/")));
+        safelyInvokeIntent(new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.msichicago.org/")));
     }
 
     public void viewTakedaSite(View view) {
-        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.takeda.com/")));
+        safelyInvokeIntent(new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.takeda.com/")));
     }
 
     public void viewBpSite(View view) {
-        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.bp.com/")));
+        safelyInvokeIntent(new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.bp.com/")));
     }
 
     public void viewComedSite(View view) {
-        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.comed.com/")));
+        safelyInvokeIntent(new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.comed.com/")));
     }
 
     public void viewMotorolaSolutionsFoundationSite(View view) {
-        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.motorolasolutions.com/en_us/about/company-overview/corporate-responsibility/motorola-solutions-foundation.html")));
+        safelyInvokeIntent(new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.motorolasolutions.com/en_us/about/company-overview/corporate-responsibility/motorola-solutions-foundation.html")));
     }
 
     public void viewPeoplesGasSite(View view) {
-        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.peoplesgasdelivery.com/")));
+        safelyInvokeIntent(new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.peoplesgasdelivery.com/")));
+    }
+
+    private void safelyInvokeIntent(Intent intent) {
+        if (intent.resolveActivity(getPackageManager()) != null) {
+            startActivity(intent);
+        } else {
+            Toast.makeText(this, R.string.an_error_occurred, Toast.LENGTH_LONG).show();
+        }
     }
 }
