@@ -17,7 +17,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".AboutActivity" />
+        <activity
+            android:name=".SponsorsActivity"
+            android:label="@string/about_our_sponsors" />
     </application>
 
 </manifest>

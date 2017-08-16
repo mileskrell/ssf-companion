@@ -54,8 +54,8 @@ public class NavDrawerActivity extends AppCompatActivity
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         switch(item.getItemId()) {
-            case R.id.menu_item_about:
-                startActivity(new Intent(this, AboutActivity.class));
+            case R.id.menu_item_sponsors:
+                startActivity(new Intent(this, SponsorsActivity.class));
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
