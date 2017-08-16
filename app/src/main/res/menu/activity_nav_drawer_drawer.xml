@@ -20,11 +20,4 @@
             android:title="Tools" />
     </group>
 
-    <group android:id="@+id/nav_group_about">
-        <item
-            android:title="@string/about_our_sponsors"
-            android:icon="@drawable/ic_info_black_24dp"
-            android:id="@+id/nav_about_our_sponsors" />
-    </group>
-
 </menu>
