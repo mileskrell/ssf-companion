@@ -36,12 +36,14 @@
                 android:layout_weight="0.5"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="16dp"
-                android:src="@drawable/logo_ssf_inc_128" />
+                android:src="@drawable/logo_ssf_inc_128"
+                android:onClick="viewSsfIncSite" />
             <ImageView
                 android:layout_width="0dp"
                 android:layout_weight="0.5"
                 android:layout_height="wrap_content"
-                android:src="@drawable/logo_cps_128" />
+                android:src="@drawable/logo_cps_128"
+                android:onClick="viewCpsSite" />
         </LinearLayout>
 
         <LinearLayout
@@ -56,12 +58,14 @@
                 android:layout_weight="0.5"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="16dp"
-                android:src="@drawable/logo_msi_128" />
+                android:src="@drawable/logo_msi_128"
+                android:onClick="viewMsiSite" />
             <ImageView
                 android:layout_width="0dp"
                 android:layout_weight="0.5"
                 android:layout_height="wrap_content"
-                android:src="@drawable/logo_takeda_128" />
+                android:src="@drawable/logo_takeda_128"
+                android:onClick="viewTakedaSite" />
         </LinearLayout>
 
         <LinearLayout
@@ -76,12 +80,14 @@
                 android:layout_weight="0.5"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="16dp"
-                android:src="@drawable/logo_bp_128" />
+                android:src="@drawable/logo_bp_128"
+                android:onClick="viewBpSite" />
             <ImageView
                 android:layout_width="0dp"
                 android:layout_weight="0.5"
                 android:layout_height="wrap_content"
-                android:src="@drawable/logo_comed_128" />
+                android:src="@drawable/logo_comed_128"
+                android:onClick="viewComedSite" />
         </LinearLayout>
 
         <LinearLayout
@@ -95,12 +101,14 @@
                 android:layout_weight="0.5"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="16dp"
-                android:src="@drawable/logo_motorola_solutions_foundation_128" />
+                android:src="@drawable/logo_motorola_solutions_foundation_128"
+                android:onClick="viewMotorolaSolutionsFoundationSite" />
             <ImageView
                 android:layout_width="0dp"
                 android:layout_weight="0.5"
                 android:layout_height="wrap_content"
-                android:src="@drawable/logo_peoples_gas_128" />
+                android:src="@drawable/logo_peoples_gas_128"
+                android:onClick="viewPeoplesGasSite" />
         </LinearLayout>
     </RelativeLayout>
 </ScrollView>
