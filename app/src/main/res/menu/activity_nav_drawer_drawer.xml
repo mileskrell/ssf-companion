@@ -20,17 +20,11 @@
             android:title="Tools" />
     </group>
 
-    <item android:title="Communicate">
-        <menu>
-            <item
-                android:id="@+id/nav_share"
-                android:icon="@drawable/ic_menu_share"
-                android:title="Share" />
-            <item
-                android:id="@+id/nav_send"
-                android:icon="@drawable/ic_menu_send"
-                android:title="Send" />
-        </menu>
-    </item>
+    <group android:id="@+id/nav_group_about">
+        <item
+            android:title="@string/about_our_sponsors"
+            android:icon="@drawable/ic_info_black_24dp"
+            android:id="@+id/nav_about_our_sponsors" />
+    </group>
 
 </menu>
