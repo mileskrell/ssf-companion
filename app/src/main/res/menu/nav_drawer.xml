@@ -2,5 +2,5 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:title="@string/about_our_sponsors"
-        android:id="@+id/menu_item_sponsors" />
+        android:id="@+id/menu_item_about_our_sponsors" />
 </menu>
