@@ -18,7 +18,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".SponsorsActivity"
+            android:name=".AboutOurSponsorsActivity"
             android:label="@string/about_our_sponsors" />
     </application>
 
