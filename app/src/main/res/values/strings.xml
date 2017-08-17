@@ -3,6 +3,11 @@
     <string name="my_email_address">feedback@example.edu</string>
     <string name="app_github_url">https://github.com/mileskrell/SSFCompanion</string>
 
+    <string name="home">Home</string>
+    <string name="calendar">Calendar</string>
+    <string name="checklist">Checklist</string>
+    <string name="safety_guidelines">Safety guidelines</string>
+    <string name="advise_a_student_program">Advise-A-Student Program</string>
     <string name="send_feedback">Send feedback</string>
     <string name="view_the_code_on_github">View the code on Github</string>
     <string name="an_error_occurred">An error occurred</string>
