@@ -32,6 +32,9 @@ public class NavDrawerActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        // Add the HomeFragment
+        onNavigationItemSelected(navigationView.getMenu().findItem(R.id.nav_home));
     }
 
     @Override
@@ -47,6 +50,12 @@ public class NavDrawerActivity extends AppCompatActivity
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch(item.getItemId()) {
+            case R.id.nav_home:
+                getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.fragment_container, HomeFragment.newInstance())
+                        .commit();
+                break;
             case R.id.nav_send_feedback:
                 Intent sendFeedbackIntent = new Intent(Intent.ACTION_SENDTO,
                         Uri.parse("mailto:" + getString(R.string.my_email_address)));
