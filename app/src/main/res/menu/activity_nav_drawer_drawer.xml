@@ -12,6 +12,10 @@
             android:icon="@drawable/ic_check_box_black_24dp"
             android:id="@+id/nav_checklist" />
         <item
+            android:title="@string/unit_converter"
+            android:icon="@drawable/ic_autorenew_black_24dp"
+            android:id="@+id/nav_unit_converter" />
+        <item
             android:title="@string/advise_a_student_program"
             android:icon="@drawable/ic_help_black_24dp"
             android:id="@+id/nav_advise_a_student" />
