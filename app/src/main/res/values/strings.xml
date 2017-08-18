@@ -1,20 +1,31 @@
 <resources>
+    <!--Misc-->
     <string name="app_name">SSF Companion</string>
     <string name="my_email_address">feedback@example.edu</string>
-    <string name="app_github_url">https://github.com/mileskrell/SSFCompanion</string>
-
-    <string name="home">Home</string>
-    <string name="calendar">Calendar</string>
-    <string name="checklist">Checklist</string>
-    <string name="safety_guidelines">Safety guidelines</string>
-    <string name="advise_a_student_program">Advise-A-Student Program</string>
-    <string name="send_feedback">Send feedback</string>
-    <string name="view_the_code_on_github">View the code on Github</string>
-    <string name="an_error_occurred">An error occurred</string>
-
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="an_error_occurred">An error occurred</string>
 
+    <!--URLs-->
+    <string name="calendar_url">http://www.cpsscifair.org/Current/current.html</string>
+    <string name="safety_guidelines_url">http://www.cpsscifair.org/Student/stu-safety.html</string>
+
+    <string name="app_github_url">https://github.com/mileskrell/SSFCompanion</string>
+
+    <!--Nav drawer items-->
+    <string name="home">Home</string>
+    <string name="checklist">Checklist</string>
+    <string name="advise_a_student_program">Advise-A-Student Program</string>
+
+    <string name="links">Links</string>
+    <string name="calendar">Calendar</string>
+    <string name="safety_guidelines">Safety guidelines</string>
+
+    <string name="about_this_app">About this app</string>
+    <string name="send_feedback">Send feedback</string>
+    <string name="view_the_code_on_github">View the code on Github</string>
+
+    <!--Home page-->
     <string name="student_science_fair_logo">Student Science Fair logo</string>
     <string name="ssf_date">March 15 - March 18, 2018</string>
     <string name="sponsor_message">The CPS Student Science Fair is made possible by a number of sponsors.\n\nTap a sponsor\'s logo to learn more about them.</string>
