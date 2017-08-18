@@ -15,6 +15,7 @@
     <!--Nav drawer items-->
     <string name="home">Home</string>
     <string name="checklist">Checklist</string>
+    <string name="unit_converter">Unit converter</string>
     <string name="advise_a_student_program">Advise-A-Student Program</string>
 
     <string name="links">Links</string>
