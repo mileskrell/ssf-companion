@@ -8,32 +8,39 @@
             android:icon="@drawable/ic_home_black_24dp"
             android:id="@+id/nav_home" />
         <item
-            android:title="@string/calendar"
-            android:icon="@drawable/ic_event_black_24dp"
-            android:id="@+id/nav_calendar" />
-        <item
             android:title="@string/checklist"
             android:icon="@drawable/ic_check_box_black_24dp"
             android:id="@+id/nav_checklist" />
-        <item
-            android:title="@string/safety_guidelines"
-            android:icon="@drawable/ic_warning_black_24dp"
-            android:id="@+id/nav_safety_guidelines" />
         <item
             android:title="@string/advise_a_student_program"
             android:icon="@drawable/ic_help_black_24dp"
             android:id="@+id/nav_advise_a_student" />
     </group>
 
-    <group android:id="@+id/nav_group_about">
-        <item
-            android:title="@string/send_feedback"
-            android:icon="@drawable/ic_feedback_black_24dp"
-            android:id="@+id/nav_send_feedback" />
-        <item
-            android:title="@string/view_the_code_on_github"
-            android:icon="@drawable/github_mark"
-            android:id="@+id/nav_view_the_code" />
-    </group>
+    <item android:title="@string/links">
+        <menu>
+            <item
+                android:title="@string/calendar"
+                android:icon="@drawable/ic_event_black_24dp"
+                android:id="@+id/nav_calendar" />
+            <item
+                android:title="@string/safety_guidelines"
+                android:icon="@drawable/ic_warning_black_24dp"
+                android:id="@+id/nav_safety_guidelines" />
+        </menu>
+    </item>
+
+    <item android:title="@string/about_this_app">
+        <menu>
+            <item
+                android:title="@string/send_feedback"
+                android:icon="@drawable/ic_feedback_black_24dp"
+                android:id="@+id/nav_send_feedback" />
+            <item
+                android:title="@string/view_the_code_on_github"
+                android:icon="@drawable/github_mark"
+                android:id="@+id/nav_view_the_code" />
+        </menu>
+    </item>
 
 </menu>

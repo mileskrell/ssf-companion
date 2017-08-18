@@ -56,6 +56,14 @@ public class NavDrawerActivity extends AppCompatActivity
                         .replace(R.id.fragment_container, HomeFragment.newInstance())
                         .commit();
                 break;
+            case R.id.nav_calendar:
+                safelyInvokeIntent(new Intent(Intent.ACTION_VIEW,
+                        Uri.parse(getString(R.string.calendar_url))));
+                break;
+            case R.id.nav_safety_guidelines:
+                safelyInvokeIntent(new Intent(Intent.ACTION_VIEW,
+                        Uri.parse(getString(R.string.safety_guidelines_url))));
+                break;
             case R.id.nav_send_feedback:
                 Intent sendFeedbackIntent = new Intent(Intent.ACTION_SENDTO,
                         Uri.parse("mailto:" + getString(R.string.my_email_address)));
