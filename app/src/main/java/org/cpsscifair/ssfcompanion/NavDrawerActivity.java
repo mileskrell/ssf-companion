@@ -17,6 +17,8 @@ import android.widget.Toast;
 public class NavDrawerActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+    private static final String TITLE = "action_bar_title";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,8 +35,19 @@ public class NavDrawerActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        // Add the HomeFragment
-        onNavigationItemSelected(navigationView.getMenu().findItem(R.id.nav_home));
+        if (savedInstanceState == null) {
+            // Add the HomeFragment
+            onNavigationItemSelected(navigationView.getMenu().findItem(R.id.nav_home));
+        } else {
+            // Set the title to whatever it was before
+            getSupportActionBar().setTitle(savedInstanceState.getString(TITLE));
+        }
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putString(TITLE, (String) getSupportActionBar().getTitle());
     }
 
     @Override
