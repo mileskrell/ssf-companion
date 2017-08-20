@@ -55,6 +55,28 @@ public class NavDrawerActivity extends AppCompatActivity
                         .beginTransaction()
                         .replace(R.id.fragment_container, HomeFragment.newInstance())
                         .commit();
+                getSupportActionBar().setTitle(R.string.app_name);
+                break;
+            case R.id.nav_checklist:
+                getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.fragment_container, ChecklistFragment.newInstance())
+                        .commit();
+                getSupportActionBar().setTitle(R.string.checklist);
+                break;
+            case R.id.nav_unit_converter:
+                getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.fragment_container, UnitConverterFragment.newInstance())
+                        .commit();
+                getSupportActionBar().setTitle(R.string.unit_converter);
+                break;
+            case R.id.nav_advise_a_student:
+                getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.fragment_container, AdviseAStudentFragment.newInstance())
+                        .commit();
+                getSupportActionBar().setTitle(R.string.advise_a_student_program);
                 break;
             case R.id.nav_calendar:
                 safelyInvokeIntent(new Intent(Intent.ACTION_VIEW,
