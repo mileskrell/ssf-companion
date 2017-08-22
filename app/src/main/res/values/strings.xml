@@ -4,7 +4,8 @@
     <string name="my_email_address">feedback@example.edu</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="an_error_occurred">An error occurred</string>
+    <string name="unable_to_compose_email">Unable to compose email</string>
+    <string name="unable_to_view_site">Unable to view site</string>
 
     <!--URLs-->
     <string name="calendar_url">http://www.cpsscifair.org/Current/current.html</string>
@@ -30,4 +31,15 @@
     <string name="student_science_fair_logo">Student Science Fair logo</string>
     <string name="ssf_date">March 15 - March 18, 2018</string>
     <string name="sponsor_message">The CPS Student Science Fair is made possible by a number of sponsors.\n\nTap a sponsor\'s logo to learn more about them.</string>
+
+    <!--Advise-A-Student page-->
+    <string name="beginning_condition">I am at the beginning stage of my science fair project. I need help in scientifically planning and carrying out my research. My science teacher cannot provide this help.</string>
+    <string name="intermediate_condition">I am at the intermediate stage of my science fair project. I have gone to local libraries and done some experimentation. I need help in improving my experiment and getting more information.</string>
+    <string name="advanced_condition">I am at the advanced stage of my science fair project. I have done extensive experimentation and research. I need help in obtaining and understanding advanced, technical information on my topic and in improving my experiment.</string>
+
+    <string name="get_help_with_your_project">Get help with your project</string>
+    <string name="please_select_an_option_first">Please select an option first</string>
+
+    <string name="advise_a_student_email_subject">Advise-A-Student Program - Request for Help</string>
+    <string name="advise_a_student_email_address">help@example.edu</string>
 </resources>
