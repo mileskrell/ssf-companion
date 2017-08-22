@@ -5,6 +5,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
+import android.support.design.widget.Snackbar;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -12,7 +13,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
 
 public class NavDrawerActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -148,11 +148,15 @@ public class NavDrawerActivity extends AppCompatActivity
         safelyInvokeIntent(new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.peoplesgasdelivery.com/")));
     }
 
-    private void safelyInvokeIntent(Intent intent) {
+    void safelyInvokeIntent(Intent intent) {
         if (intent.resolveActivity(getPackageManager()) != null) {
             startActivity(intent);
         } else {
-            Toast.makeText(this, R.string.an_error_occurred, Toast.LENGTH_LONG).show();
+            if (intent.getAction().equals(Intent.ACTION_SENDTO)) {
+                Snackbar.make(findViewById(R.id.drawer_layout), R.string.unable_to_compose_email, Snackbar.LENGTH_LONG).show();
+            } else {
+                Snackbar.make(findViewById(R.id.drawer_layout), R.string.unable_to_view_site, Snackbar.LENGTH_LONG).show();
+            }
         }
     }
 }
