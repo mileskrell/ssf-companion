@@ -15,6 +15,7 @@ import android.widget.EditText;
 public class EditTextDialogFragment extends DialogFragment {
 
     public static final String DIALOG_FRAGMENT = "dialog_fragment";
+    public static final String DIALOG_CURRENT_TEXT = "dialog_current_text";
 
     public static final String DIALOG_OLD_ITEM = "dialog_old_item";
 
@@ -42,7 +43,7 @@ public class EditTextDialogFragment extends DialogFragment {
 
     @NonNull
     @Override
-    public Dialog onCreateDialog(Bundle savedInstanceState) {
+    public Dialog onCreateDialog(final Bundle savedInstanceState) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
         builder.setView(R.layout.dialog_fragment);
@@ -80,12 +81,18 @@ public class EditTextDialogFragment extends DialogFragment {
                 EditText editText = (EditText) ((AlertDialog) dialog).findViewById(R.id.dialog_fragment_edit_text);
                 final Button positiveButton = ((AlertDialog) dialog).getButton(DialogInterface.BUTTON_POSITIVE);
 
-                if (oldItem == null) {
+                if (oldItem != null) {
+                    if (savedInstanceState != null) {
+                        editText.setText(savedInstanceState.getString(DIALOG_CURRENT_TEXT));
+                    } else {
+                        int secondCommaPosition = ChecklistAdapter.getSecondCommaPosition(oldItem);
+                        String oldItemText = oldItem.substring(secondCommaPosition + 2);
+                        editText.setText(oldItemText);
+                    }
+                }
+
+                if (editText.getText().toString().isEmpty()) {
                     positiveButton.setEnabled(false);
-                } else {
-                    int secondCommaPosition = ChecklistAdapter.getSecondCommaPosition(oldItem);
-                    String oldItemText = oldItem.substring(secondCommaPosition + 2);
-                    editText.setText(oldItemText);
                 }
 
                 editText.addTextChangedListener(new TextWatcher() {
@@ -112,5 +119,12 @@ public class EditTextDialogFragment extends DialogFragment {
         });
 
         return alertDialog;
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        EditText editText = (EditText) getDialog().findViewById(R.id.dialog_fragment_edit_text);
+        outState.putString(DIALOG_CURRENT_TEXT, editText.getText().toString());
     }
 }
