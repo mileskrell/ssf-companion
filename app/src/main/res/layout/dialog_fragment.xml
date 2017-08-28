@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="?attr/dialogPreferredPadding"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:inputType="textAutoCorrect|textMultiLine"
+        tools:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc in congue sem, sit amet condimentum augue. Morbi dictum risus libero."
+        android:id="@+id/dialog_fragment_edit_text" />
+</FrameLayout>
