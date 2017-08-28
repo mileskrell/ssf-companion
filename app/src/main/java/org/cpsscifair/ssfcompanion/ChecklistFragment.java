@@ -34,11 +34,6 @@ public class ChecklistFragment extends Fragment {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        // It would be great to have smooth animations, but it causes weird problems
-        // once an item has been checked/unchecked a couple of times
-        // See https://stackoverflow.com/a/31787795
-        recyclerView.setItemAnimator(null);
-
         checklistAdapter = new ChecklistAdapter(getContext(), getActivity().getSupportFragmentManager());
         recyclerView.setAdapter(checklistAdapter);
 

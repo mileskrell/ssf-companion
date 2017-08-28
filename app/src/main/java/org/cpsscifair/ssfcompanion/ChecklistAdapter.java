@@ -72,6 +72,11 @@ class ChecklistAdapter extends RecyclerView.Adapter<ChecklistAdapter.ViewHolder>
             // Add strike-through to TextView
             // See https://stackoverflow.com/a/9786629
             holder.textView.setPaintFlags(holder.textView.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+        } else {
+            holder.checkBox.setChecked(false);
+            // Remove strike-through from TextView
+            // See https://stackoverflow.com/a/9786629
+            holder.textView.setPaintFlags(holder.textView.getPaintFlags() & (~Paint.STRIKE_THRU_TEXT_FLAG));
         }
 
         // Now, we add the text for the item
