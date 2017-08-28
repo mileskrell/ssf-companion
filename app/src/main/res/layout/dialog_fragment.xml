@@ -11,6 +11,8 @@
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:inputType="textAutoCorrect|textMultiLine"
+        android:maxLines="10"
+        android:scrollbars="vertical"
         tools:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc in congue sem, sit amet condimentum augue. Morbi dictum risus libero."
         android:id="@+id/dialog_fragment_edit_text" />
 </FrameLayout>
