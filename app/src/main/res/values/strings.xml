@@ -32,6 +32,17 @@
     <string name="ssf_date">March 15 - March 18, 2018</string>
     <string name="sponsor_message">The CPS Student Science Fair is made possible by a number of sponsors.\n\nTap a sponsor\'s logo to learn more about them.</string>
 
+    <!--Checklist page-->
+    <string-array name="default_checklist_items">
+        <item>1, 0, To add a new item, tap the button in the bottom-right corner.</item>
+        <item>2, 0, To mark an item as done, tap the item\'s check box.</item>
+        <item>3, 1, Items marked as done look like this.</item>
+        <item>4, 0, All changes are saved automatically.</item>
+    </string-array>
+
+    <string name="cancel">Cancel</string>
+    <string name="okay">Okay</string>
+
     <!--Advise-A-Student page-->
     <string name="beginning_condition">I am at the beginning stage of my science fair project. I need help in scientifically planning and carrying out my research. My science teacher cannot provide this help.</string>
     <string name="intermediate_condition">I am at the intermediate stage of my science fair project. I have gone to local libraries and done some experimentation. I need help in improving my experiment and getting more information.</string>

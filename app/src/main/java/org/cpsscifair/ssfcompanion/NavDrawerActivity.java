@@ -19,6 +19,8 @@ public class NavDrawerActivity extends AppCompatActivity
 
     private static final String TITLE = "action_bar_title";
 
+    static final String CHECKLIST_FRAGMENT = "checklist_fragment";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -73,7 +75,7 @@ public class NavDrawerActivity extends AppCompatActivity
             case R.id.nav_checklist:
                 getSupportFragmentManager()
                         .beginTransaction()
-                        .replace(R.id.fragment_container, ChecklistFragment.newInstance())
+                        .replace(R.id.fragment_container, ChecklistFragment.newInstance(), CHECKLIST_FRAGMENT)
                         .commit();
                 getSupportActionBar().setTitle(R.string.checklist);
                 break;
