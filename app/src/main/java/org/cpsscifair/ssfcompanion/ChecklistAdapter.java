@@ -3,6 +3,7 @@ package org.cpsscifair.ssfcompanion;
 import android.content.Context;
 import android.graphics.Paint;
 import android.preference.PreferenceManager;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,8 +22,9 @@ class ChecklistAdapter extends RecyclerView.Adapter<ChecklistAdapter.ViewHolder>
 
     private ArrayList<String> checklistItems;
     private Context context;
+    private FragmentManager supportFragmentManager;
 
-    ChecklistAdapter(Context context) {
+    ChecklistAdapter(Context context, FragmentManager supportFragmentManager) {
 
         String[] defaultItemsArray = context.getResources().getStringArray(R.array.default_checklist_items);
         HashSet<String> defaultItemsHashSet = new HashSet<>(Arrays.asList(defaultItemsArray));
@@ -35,6 +37,7 @@ class ChecklistAdapter extends RecyclerView.Adapter<ChecklistAdapter.ViewHolder>
 
         sortItems();
         this.context = context;
+        this.supportFragmentManager = supportFragmentManager;
     }
 
 
@@ -59,7 +62,7 @@ class ChecklistAdapter extends RecyclerView.Adapter<ChecklistAdapter.ViewHolder>
     }
 
     @Override
-    public void onBindViewHolder(final ChecklistAdapter.ViewHolder holder, final int position) {
+    public void onBindViewHolder(final ChecklistAdapter.ViewHolder holder, int position) {
         // First, we figure out whether this item should be checked
         String item = checklistItems.get(position);
         int firstCommaPosition = getFirstCommaPosition(item);
@@ -106,6 +109,16 @@ class ChecklistAdapter extends RecyclerView.Adapter<ChecklistAdapter.ViewHolder>
                 saveItems();
             }
         });
+
+        holder.textView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String oldItem = checklistItems.get(holder.getAdapterPosition());
+
+                EditTextDialogFragment.newInstance(oldItem)
+                        .show(supportFragmentManager, EditTextDialogFragment.DIALOG_FRAGMENT);
+            }
+        });
     }
 
     @Override
@@ -113,10 +126,19 @@ class ChecklistAdapter extends RecyclerView.Adapter<ChecklistAdapter.ViewHolder>
         return checklistItems.size();
     }
 
-    private int getFirstCommaPosition(String itemContainingComma) {
+    private static int getFirstCommaPosition(String itemContainingComma) {
         int commaPosition = 0;
         // Increment until we get to the first comma
         while (itemContainingComma.charAt(commaPosition) != ',') {
+            commaPosition ++;
+        }
+        return commaPosition;
+    }
+
+    static int getSecondCommaPosition(String itemContainingCommas) {
+        int commaPosition = getFirstCommaPosition(itemContainingCommas) + 1;
+        // Increment until we get to the second comma
+        while (itemContainingCommas.charAt(commaPosition) != ',') {
             commaPosition ++;
         }
         return commaPosition;
@@ -146,9 +168,21 @@ class ChecklistAdapter extends RecyclerView.Adapter<ChecklistAdapter.ViewHolder>
                 .apply();
     }
 
-    void addItem(String item) {
-        checklistItems.add((checklistItems.size() + 1) + ", 0, " + item);
+    void addItem(String itemText) {
+        checklistItems.add((checklistItems.size() + 1) + ", 0, " + itemText);
         notifyItemInserted(checklistItems.size() + 1);
+
+        saveItems();
+    }
+
+    void editItem(String oldItem, String newItemText) {
+
+        String oldItemMinusText = oldItem.substring(0, getSecondCommaPosition(oldItem) + 2);
+
+        String newItem = oldItemMinusText + newItemText;
+
+        checklistItems.set(checklistItems.indexOf(oldItem), newItem);
+        notifyItemChanged(checklistItems.indexOf(newItem));
 
         saveItems();
     }
