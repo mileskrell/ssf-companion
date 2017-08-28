@@ -11,8 +11,6 @@ import android.view.ViewGroup;
 
 public class ChecklistFragment extends Fragment {
 
-    private static final String DIALOG_FRAGMENT = "dialog_fragment";
-
     private ChecklistAdapter checklistAdapter;
 
     public ChecklistFragment() {
@@ -36,8 +34,12 @@ public class ChecklistFragment extends Fragment {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        checklistAdapter = new ChecklistAdapter(getContext());
+        // It would be great to have smooth animations, but it causes weird problems
+        // once an item has been checked/unchecked a couple of times
+        // See https://stackoverflow.com/a/31787795
+        recyclerView.setItemAnimator(null);
 
+        checklistAdapter = new ChecklistAdapter(getContext(), getActivity().getSupportFragmentManager());
         recyclerView.setAdapter(checklistAdapter);
 
         final FloatingActionButton floatingActionButton = (FloatingActionButton) v.findViewById(R.id.checklist_fab);
@@ -45,15 +47,19 @@ public class ChecklistFragment extends Fragment {
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                EditTextDialogFragment.newInstance()
-                        .show(getActivity().getSupportFragmentManager(), DIALOG_FRAGMENT);
+                EditTextDialogFragment.newInstance(null)
+                        .show(getActivity().getSupportFragmentManager(), EditTextDialogFragment.DIALOG_FRAGMENT);
             }
         });
 
         return v;
     }
 
-    void addItem(String item) {
-        checklistAdapter.addItem(item);
+    void addItem(String itemText) {
+        checklistAdapter.addItem(itemText);
+    }
+
+    void editItem(String oldItem, String newItemText) {
+        checklistAdapter.editItem(oldItem, newItemText);
     }
 }
