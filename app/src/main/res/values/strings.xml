@@ -36,6 +36,7 @@
     <string name="default_checklist_items">
         [{\"checked\":false,\"text\":\"To add a new item, tap the button in the bottom-right corner.\"},
          {\"checked\":false,\"text\":\"Tap on an item to edit it.\"},
+         {\"checked\":false,\"text\":\"To remove an item, swipe it to the side.\"},
          {\"checked\":false,\"text\":\"To mark an item as done, tap the item\'s check box.\"},
          {\"checked\":true,\"text\":\"Items marked as done look like this.\"},
          {\"checked\":false,\"text\":\"All changes are saved automatically\"}]
@@ -43,6 +44,9 @@
 
     <string name="cancel">Cancel</string>
     <string name="okay">Okay</string>
+
+    <string name="item_removed">Item removed</string>
+    <string name="undo">Undo</string>
 
     <!--Advise-A-Student page-->
     <string name="beginning_condition">I am at the beginning stage of my science fair project. I need help in scientifically planning and carrying out my research. My science teacher cannot provide this help.</string>
