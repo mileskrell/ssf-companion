@@ -17,6 +17,7 @@ import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Collections;
 
 class ChecklistAdapter extends RecyclerView.Adapter<ChecklistAdapter.ViewHolder> {
 
@@ -156,5 +157,12 @@ class ChecklistAdapter extends RecyclerView.Adapter<ChecklistAdapter.ViewHolder>
 
         saveItems();
         return removedItem;
+    }
+
+    void swapItems(int fromIndex, int toIndex) {
+        Collections.swap(checklistItems, fromIndex, toIndex);
+        notifyItemMoved(fromIndex, toIndex);
+
+        saveItems();
     }
 }
