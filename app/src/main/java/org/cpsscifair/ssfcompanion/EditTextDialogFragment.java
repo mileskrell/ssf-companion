@@ -17,18 +17,27 @@ public class EditTextDialogFragment extends DialogFragment {
     public static final String DIALOG_FRAGMENT = "dialog_fragment";
     public static final String DIALOG_CURRENT_TEXT = "dialog_current_text";
 
-    public static final String DIALOG_OLD_ITEM = "dialog_old_item";
+    public static final String ITEM_INDEX = "item_index";
+    public static final String OLD_ITEM_TEXT = "old_item_text";
 
-    @Nullable private String oldItem;
+    private int itemIndex;
+    private String oldItemText;
+
 
     public EditTextDialogFragment() {
         // Required empty public constructor
     }
 
-    public static EditTextDialogFragment newInstance(@Nullable String oldItem) {
+    public static EditTextDialogFragment newInstance() {
+        return new EditTextDialogFragment();
+    }
+
+    public static EditTextDialogFragment newInstance(int itemIndex, String oldItemText) {
+
         EditTextDialogFragment editTextDialogFragment = new EditTextDialogFragment();
         Bundle args = new Bundle();
-        args.putString(DIALOG_OLD_ITEM, oldItem);
+        args.putInt(ITEM_INDEX, itemIndex);
+        args.putString(OLD_ITEM_TEXT, oldItemText);
         editTextDialogFragment.setArguments(args);
         return editTextDialogFragment;
     }
@@ -37,7 +46,8 @@ public class EditTextDialogFragment extends DialogFragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            oldItem = getArguments().getString(DIALOG_OLD_ITEM);
+            itemIndex = getArguments().getInt(ITEM_INDEX);
+            oldItemText = getArguments().getString(OLD_ITEM_TEXT);
         }
     }
 
@@ -58,10 +68,10 @@ public class EditTextDialogFragment extends DialogFragment {
                         .getSupportFragmentManager()
                         .findFragmentByTag(NavDrawerActivity.CHECKLIST_FRAGMENT);
 
-                if (oldItem == null) {
+                if (oldItemText == null) {
                     checklistFragment.addItem(editText.getText().toString());
                 } else {
-                    checklistFragment.editItem(oldItem, editText.getText().toString());
+                    checklistFragment.editItem(itemIndex, editText.getText().toString());
                 }
             }
         });
@@ -81,14 +91,11 @@ public class EditTextDialogFragment extends DialogFragment {
                 EditText editText = (EditText) ((AlertDialog) dialog).findViewById(R.id.dialog_fragment_edit_text);
                 final Button positiveButton = ((AlertDialog) dialog).getButton(DialogInterface.BUTTON_POSITIVE);
 
-                if (oldItem != null) {
-                    if (savedInstanceState != null) {
-                        editText.setText(savedInstanceState.getString(DIALOG_CURRENT_TEXT));
-                    } else {
-                        int secondCommaPosition = ChecklistAdapter.getSecondCommaPosition(oldItem);
-                        String oldItemText = oldItem.substring(secondCommaPosition + 2);
-                        editText.setText(oldItemText);
-                    }
+                if (savedInstanceState != null) {
+                    editText.setText(savedInstanceState.getString(DIALOG_CURRENT_TEXT));
+                } else {
+                    editText.setText(oldItemText);
+                    // If we're adding an item and oldItemText is null, it just clears it
                 }
 
                 if (editText.getText().toString().isEmpty()) {

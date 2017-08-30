@@ -42,7 +42,7 @@ public class ChecklistFragment extends Fragment {
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                EditTextDialogFragment.newInstance(null)
+                EditTextDialogFragment.newInstance()
                         .show(getActivity().getSupportFragmentManager(), EditTextDialogFragment.DIALOG_FRAGMENT);
             }
         });
@@ -54,7 +54,7 @@ public class ChecklistFragment extends Fragment {
         checklistAdapter.addItem(itemText);
     }
 
-    void editItem(String oldItem, String newItemText) {
-        checklistAdapter.editItem(oldItem, newItemText);
+    void editItem(int index, String text) {
+        checklistAdapter.editItem(index, text);
     }
 }

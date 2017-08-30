@@ -33,13 +33,13 @@
     <string name="sponsor_message">The CPS Student Science Fair is made possible by a number of sponsors.\n\nTap a sponsor\'s logo to learn more about them.</string>
 
     <!--Checklist page-->
-    <string-array name="default_checklist_items">
-        <item>1, 0, To add a new item, tap the button in the bottom-right corner.</item>
-        <item>2, 0, Tap on an item to edit it.</item>
-        <item>3, 0, To mark an item as done, tap the item\'s check box.</item>
-        <item>4, 1, Items marked as done look like this.</item>
-        <item>5, 0, All changes are saved automatically.</item>
-    </string-array>
+    <string name="default_checklist_items">
+        [{\"checked\":false,\"text\":\"To add a new item, tap the button in the bottom-right corner.\"},
+         {\"checked\":false,\"text\":\"Tap on an item to edit it.\"},
+         {\"checked\":false,\"text\":\"To mark an item as done, tap the item\'s check box.\"},
+         {\"checked\":true,\"text\":\"Items marked as done look like this.\"},
+         {\"checked\":false,\"text\":\"All changes are saved automatically\"}]
+    </string>
 
     <string name="cancel">Cancel</string>
     <string name="okay">Okay</string>

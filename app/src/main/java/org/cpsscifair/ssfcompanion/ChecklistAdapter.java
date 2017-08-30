@@ -12,30 +12,36 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashSet;
 
 class ChecklistAdapter extends RecyclerView.Adapter<ChecklistAdapter.ViewHolder> {
 
     private static final String CHECKLIST_ITEMS = "checklist_items";
 
-    private ArrayList<String> checklistItems;
+    private ArrayList<ChecklistItem> checklistItems;
     private Context context;
     private FragmentManager supportFragmentManager;
+    private Gson gson;
 
     ChecklistAdapter(Context context, FragmentManager supportFragmentManager) {
 
-        String[] defaultItemsArray = context.getResources().getStringArray(R.array.default_checklist_items);
-        HashSet<String> defaultItemsHashSet = new HashSet<>(Arrays.asList(defaultItemsArray));
+        gson = new Gson();
+        Type arrayListType = new TypeToken<ArrayList<ChecklistItem>>(){}.getType();
 
-        HashSet<String> checklistItemsHashSet
-                = new HashSet<>(PreferenceManager.getDefaultSharedPreferences(context)
-                .getStringSet(CHECKLIST_ITEMS, defaultItemsHashSet));
+        if (PreferenceManager.getDefaultSharedPreferences(context).contains(CHECKLIST_ITEMS)) {
+            String checklistItemsJson = PreferenceManager.getDefaultSharedPreferences(context)
+                    .getString(CHECKLIST_ITEMS, "");
+            checklistItems = gson.fromJson(checklistItemsJson, arrayListType);
+        } else {
+            String defaultChecklistItemsJson = context.getResources()
+                    .getString(R.string.default_checklist_items);
+            checklistItems = gson.fromJson(defaultChecklistItemsJson, arrayListType);
+        }
 
-        checklistItems = new ArrayList<>(checklistItemsHashSet);
-
-        sortItems();
         this.context = context;
         this.supportFragmentManager = supportFragmentManager;
     }
@@ -64,10 +70,9 @@ class ChecklistAdapter extends RecyclerView.Adapter<ChecklistAdapter.ViewHolder>
     @Override
     public void onBindViewHolder(final ChecklistAdapter.ViewHolder holder, int position) {
         // First, we figure out whether this item should be checked
-        String item = checklistItems.get(position);
-        int firstCommaPosition = getFirstCommaPosition(item);
+        final ChecklistItem item = checklistItems.get(position);
 
-        if (item.charAt(firstCommaPosition + 2) == '1') {
+        if (item.isChecked()) {
             holder.checkBox.setChecked(true);
             // Add strike-through to TextView
             // See https://stackoverflow.com/a/9786629
@@ -80,8 +85,7 @@ class ChecklistAdapter extends RecyclerView.Adapter<ChecklistAdapter.ViewHolder>
         }
 
         // Now, we add the text for the item
-        item = item.substring(firstCommaPosition + 5);
-        holder.textView.setText(item);
+        holder.textView.setText(item.getText());
 
         holder.checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -90,26 +94,11 @@ class ChecklistAdapter extends RecyclerView.Adapter<ChecklistAdapter.ViewHolder>
                 // See https://stackoverflow.com/a/9786629
                 if (isChecked) {
                     holder.textView.setPaintFlags(holder.textView.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+                    item.setChecked(true);
                 } else {
                     holder.textView.setPaintFlags(holder.textView.getPaintFlags() & (~Paint.STRIKE_THRU_TEXT_FLAG));
+                    item.setChecked(true);
                 }
-
-                // Save new checkbox state
-
-                String changedItem = checklistItems.get(holder.getAdapterPosition());
-
-                int firstCommaPosition = getFirstCommaPosition(changedItem);
-
-                // Includes everything before the boolean
-                String finalItem = changedItem.substring(0, firstCommaPosition + 2);
-
-                if (isChecked) {
-                    finalItem += "1" + changedItem.substring(finalItem.length() + 1);
-                } else {
-                    finalItem += "0" + changedItem.substring(finalItem.length() + 1);
-                }
-
-                checklistItems.set(holder.getAdapterPosition(), finalItem);
 
                 saveItems();
             }
@@ -118,9 +107,9 @@ class ChecklistAdapter extends RecyclerView.Adapter<ChecklistAdapter.ViewHolder>
         holder.textView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String oldItem = checklistItems.get(holder.getAdapterPosition());
+                String oldItemText = checklistItems.get(holder.getAdapterPosition()).getText();
 
-                EditTextDialogFragment.newInstance(oldItem)
+                EditTextDialogFragment.newInstance(holder.getAdapterPosition(), oldItemText)
                         .show(supportFragmentManager, EditTextDialogFragment.DIALOG_FRAGMENT);
             }
         });
@@ -131,63 +120,24 @@ class ChecklistAdapter extends RecyclerView.Adapter<ChecklistAdapter.ViewHolder>
         return checklistItems.size();
     }
 
-    private static int getFirstCommaPosition(String itemContainingComma) {
-        int commaPosition = 0;
-        // Increment until we get to the first comma
-        while (itemContainingComma.charAt(commaPosition) != ',') {
-            commaPosition ++;
-        }
-        return commaPosition;
-    }
-
-    static int getSecondCommaPosition(String itemContainingCommas) {
-        int commaPosition = getFirstCommaPosition(itemContainingCommas) + 1;
-        // Increment until we get to the second comma
-        while (itemContainingCommas.charAt(commaPosition) != ',') {
-            commaPosition ++;
-        }
-        return commaPosition;
-    }
-
-    private void sortItems() {
-        int x = 1;
-        ArrayList<String> sortedItems = new ArrayList<>();
-
-        for (int i = 0; i < checklistItems.size(); i ++) {
-            for (String item : checklistItems) {
-                if (item.substring(0, getFirstCommaPosition(item)).equals(String.valueOf(x))) {
-                    sortedItems.add(item);
-                    break;
-                }
-            }
-            x ++;
-        }
-
-        checklistItems = sortedItems;
-    }
-
     private void saveItems() {
+        String checklistItemsJson = gson.toJson(checklistItems);
         PreferenceManager.getDefaultSharedPreferences(context)
                 .edit()
-                .putStringSet(CHECKLIST_ITEMS, new HashSet<>(checklistItems))
+                .putString(CHECKLIST_ITEMS, checklistItemsJson)
                 .apply();
     }
 
     void addItem(String itemText) {
-        checklistItems.add((checklistItems.size() + 1) + ", 0, " + itemText);
-        notifyItemInserted(checklistItems.size() + 1);
+        checklistItems.add(new ChecklistItem(itemText));
+        notifyItemInserted(checklistItems.size() - 1);
 
         saveItems();
     }
 
-    void editItem(String oldItem, String newItemText) {
-
-        String oldItemMinusText = oldItem.substring(0, getSecondCommaPosition(oldItem) + 2);
-
-        String newItem = oldItemMinusText + newItemText;
-
-        checklistItems.set(checklistItems.indexOf(oldItem), newItem);
-        notifyItemChanged(checklistItems.indexOf(newItem));
+    void editItem(int index, String text) {
+        checklistItems.get(index).setText(text);
+        notifyItemChanged(index);
 
         saveItems();
     }
