@@ -128,9 +128,16 @@ class ChecklistAdapter extends RecyclerView.Adapter<ChecklistAdapter.ViewHolder>
                 .apply();
     }
 
-    void addItem(String itemText) {
-        checklistItems.add(new ChecklistItem(itemText));
+    void addItem(String text) {
+        checklistItems.add(new ChecklistItem(false, text));
         notifyItemInserted(checklistItems.size() - 1);
+
+        saveItems();
+    }
+
+    void addItem(int index, ChecklistItem checklistItem) {
+        checklistItems.add(index, checklistItem);
+        notifyItemInserted(index);
 
         saveItems();
     }
@@ -140,5 +147,14 @@ class ChecklistAdapter extends RecyclerView.Adapter<ChecklistAdapter.ViewHolder>
         notifyItemChanged(index);
 
         saveItems();
+    }
+
+    ChecklistItem removeItem(int index) {
+        ChecklistItem removedItem = checklistItems.get(index);
+        checklistItems.remove(index);
+        notifyItemRemoved(index);
+
+        saveItems();
+        return removedItem;
     }
 }

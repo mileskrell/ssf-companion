@@ -5,8 +5,8 @@ class ChecklistItem {
     private boolean checked;
     private String text;
 
-    ChecklistItem(String text) {
-        this.checked = false;
+    ChecklistItem(boolean checked, String text) {
+        this.checked = checked;
         this.text = text;
     }
 
