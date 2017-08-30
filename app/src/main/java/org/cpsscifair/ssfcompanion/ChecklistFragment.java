@@ -42,7 +42,11 @@ public class ChecklistFragment extends Fragment {
         ItemTouchHelper.SimpleCallback callback = new ItemTouchHelper.SimpleCallback(ItemTouchHelper.UP | ItemTouchHelper.DOWN, ItemTouchHelper.START | ItemTouchHelper.END) {
             @Override
             public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
-                return false;
+                // This method is called each time the item is moved to a new position,
+                // so it's just doing a series of consecutive swaps.
+                // E.g. Moving 1 to 4 really means: swap 1 and 2, 2 and 3, and then 3 and 4.
+                swapItems(viewHolder.getAdapterPosition(), target.getAdapterPosition());
+                return true;
             }
 
             @Override
@@ -91,5 +95,9 @@ public class ChecklistFragment extends Fragment {
 
     ChecklistItem removeItem(int index) {
         return checklistAdapter.removeItem(index);
+    }
+
+    void swapItems(int fromIndex, int toIndex) {
+        checklistAdapter.swapItems(fromIndex, toIndex);
     }
 }
