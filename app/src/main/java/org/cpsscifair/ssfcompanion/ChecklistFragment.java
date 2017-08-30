@@ -31,7 +31,7 @@ public class ChecklistFragment extends Fragment {
 
         setHasOptionsMenu(true);
 
-        final RecyclerView recyclerView = (RecyclerView) v.findViewById(R.id.checklist_recycler_view);
+        RecyclerView recyclerView = (RecyclerView) v.findViewById(R.id.checklist_recycler_view);
 
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));

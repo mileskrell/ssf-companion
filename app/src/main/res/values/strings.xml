@@ -35,12 +35,11 @@
     <!--Checklist page-->
     <string name="default_checklist_items">
         [{\"checked\":false,\"text\":\"To add a new item, tap the button in the bottom-right corner.\"},
-         {\"checked\":false,\"text\":\"Tap on an item to edit it.\"},
+         {\"checked\":false,\"text\":\"Tap an item to edit it.\"},
          {\"checked\":false,\"text\":\"To remove an item, swipe it to the side.\"},
          {\"checked\":false,\"text\":\"To move an item, tap and hold, then drag up or down.\"},
          {\"checked\":false,\"text\":\"To mark an item as done, tap the item\'s check box.\"},
-         {\"checked\":true,\"text\":\"Items marked as done look like this.\"},
-         {\"checked\":false,\"text\":\"All changes are saved automatically\"}]
+         {\"checked\":false,\"text\":\"All changes are saved automatically.\"}]
     </string>
 
     <string name="cancel">Cancel</string>
