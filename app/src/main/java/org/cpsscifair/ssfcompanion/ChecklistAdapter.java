@@ -98,7 +98,7 @@ class ChecklistAdapter extends RecyclerView.Adapter<ChecklistAdapter.ViewHolder>
                     item.setChecked(true);
                 } else {
                     holder.textView.setPaintFlags(holder.textView.getPaintFlags() & (~Paint.STRIKE_THRU_TEXT_FLAG));
-                    item.setChecked(true);
+                    item.setChecked(false);
                 }
 
                 saveItems();
