@@ -15,6 +15,9 @@ public class ChecklistFragment extends Fragment {
 
     private ChecklistAdapter checklistAdapter;
 
+    // Used to keep the user from re-adding an item multiple times
+    private boolean userAlreadyClickedUndo;
+
     public ChecklistFragment() {
         // Required empty public constructor
     }
@@ -51,6 +54,7 @@ public class ChecklistFragment extends Fragment {
 
             @Override
             public void onSwiped(RecyclerView.ViewHolder viewHolder, int i) {
+                userAlreadyClickedUndo = false;
                 final int removedItemIndex = viewHolder.getAdapterPosition();
                 final ChecklistItem removedItem = removeItem(viewHolder.getAdapterPosition());
 
@@ -58,7 +62,10 @@ public class ChecklistFragment extends Fragment {
                         .setAction(R.string.undo, new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                addItem(removedItemIndex, removedItem);
+                                if (! userAlreadyClickedUndo) {
+                                    userAlreadyClickedUndo = true;
+                                    addItem(removedItemIndex, removedItem);
+                                }
                             }
                         })
                         .show();
