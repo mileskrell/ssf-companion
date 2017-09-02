@@ -48,7 +48,7 @@
                 android:layout_width="0dp"
                 android:layout_weight="0.5"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="16dp"
+                android:layout_marginEnd="16dp"
                 android:src="@drawable/logo_ssf_inc_128"
                 android:onClick="viewSsfIncSite" />
             <ImageView
@@ -70,7 +70,7 @@
                 android:layout_width="0dp"
                 android:layout_weight="0.5"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="16dp"
+                android:layout_marginEnd="16dp"
                 android:src="@drawable/logo_msi_128"
                 android:onClick="viewMsiSite" />
             <ImageView
@@ -92,7 +92,7 @@
                 android:layout_width="0dp"
                 android:layout_weight="0.5"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="16dp"
+                android:layout_marginEnd="16dp"
                 android:src="@drawable/logo_bp_128"
                 android:onClick="viewBpSite" />
             <ImageView
@@ -113,7 +113,7 @@
                 android:layout_width="0dp"
                 android:layout_weight="0.5"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="16dp"
+                android:layout_marginEnd="16dp"
                 android:src="@drawable/logo_motorola_solutions_foundation_128"
                 android:onClick="viewMotorolaSolutionsFoundationSite" />
             <ImageView
