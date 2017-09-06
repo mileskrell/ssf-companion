@@ -32,6 +32,15 @@
     <string name="ssf_date">March 15 - March 18, 2018</string>
     <string name="sponsor_message">The CPS Student Science Fair is made possible by a number of sponsors.\n\nTap a sponsor\'s logo to learn more about them.</string>
 
+    <string name="visit_chicago_public_schools_student_science_fair_inc_website">Visit Chicago Public Schools Student Science Fair, Inc website</string>
+    <string name="visit_chicago_public_schools_website">Visit Chicago Public Schools website</string>
+    <string name="visit_museum_of_science_and_industry_website">Visit Museum of Science and Industry website</string>
+    <string name="visit_takeda_website">Visit Takeda website</string>
+    <string name="visit_bp_website">Visit BP website</string>
+    <string name="visit_comed_website">Visit ComEd website</string>
+    <string name="visit_motorola_solutions_foundation_website">Visit Motorola Solutions Foundation website</string>
+    <string name="visit_peoples_gas_website">Visit Peoples Gas website</string>
+
     <!--Checklist page-->
     <string name="default_checklist_items">
         [{\"checked\":false,\"text\":\"To add a new item, tap the button in the bottom-right corner.\"},

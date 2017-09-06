@@ -49,12 +49,14 @@
                 android:layout_weight="0.5"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="16dp"
+                android:contentDescription="@string/visit_chicago_public_schools_student_science_fair_inc_website"
                 android:src="@drawable/logo_ssf_inc_128"
                 android:onClick="viewSsfIncSite" />
             <ImageView
                 android:layout_width="0dp"
                 android:layout_weight="0.5"
                 android:layout_height="wrap_content"
+                android:contentDescription="@string/visit_chicago_public_schools_website"
                 android:src="@drawable/logo_cps_128"
                 android:onClick="viewCpsSite" />
         </LinearLayout>
@@ -71,12 +73,14 @@
                 android:layout_weight="0.5"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="16dp"
+                android:contentDescription="@string/visit_museum_of_science_and_industry_website"
                 android:src="@drawable/logo_msi_128"
                 android:onClick="viewMsiSite" />
             <ImageView
                 android:layout_width="0dp"
                 android:layout_weight="0.5"
                 android:layout_height="wrap_content"
+                android:contentDescription="@string/visit_takeda_website"
                 android:src="@drawable/logo_takeda_128"
                 android:onClick="viewTakedaSite" />
         </LinearLayout>
@@ -93,12 +97,14 @@
                 android:layout_weight="0.5"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="16dp"
+                android:contentDescription="@string/visit_bp_website"
                 android:src="@drawable/logo_bp_128"
                 android:onClick="viewBpSite" />
             <ImageView
                 android:layout_width="0dp"
                 android:layout_weight="0.5"
                 android:layout_height="wrap_content"
+                android:contentDescription="@string/visit_comed_website"
                 android:src="@drawable/logo_comed_128"
                 android:onClick="viewComedSite" />
         </LinearLayout>
@@ -114,12 +120,14 @@
                 android:layout_weight="0.5"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="16dp"
+                android:contentDescription="@string/visit_motorola_solutions_foundation_website"
                 android:src="@drawable/logo_motorola_solutions_foundation_128"
                 android:onClick="viewMotorolaSolutionsFoundationSite" />
             <ImageView
                 android:layout_width="0dp"
                 android:layout_weight="0.5"
                 android:layout_height="wrap_content"
+                android:contentDescription="@string/visit_peoples_gas_website"
                 android:src="@drawable/logo_peoples_gas_128"
                 android:onClick="viewPeoplesGasSite" />
         </LinearLayout>
