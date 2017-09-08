@@ -38,8 +38,8 @@
             android:id="@+id/text_view_sponsors" />
 
         <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="128dp"
             android:layout_below="@id/text_view_sponsors"
             android:layout_marginBottom="32dp"
             android:weightSum="1"
@@ -62,8 +62,8 @@
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="128dp"
             android:layout_marginBottom="32dp"
             android:weightSum="1"
             android:layout_below="@id/sponsors_row_1"
@@ -86,8 +86,8 @@
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="128dp"
             android:layout_marginBottom="32dp"
             android:weightSum="1"
             android:layout_below="@id/sponsors_row_2"
@@ -110,8 +110,8 @@
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="128dp"
             android:weightSum="1"
             android:layout_below="@id/sponsors_row_3"
             android:id="@+id/sponsors_row_4">
