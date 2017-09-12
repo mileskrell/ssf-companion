@@ -81,7 +81,7 @@
                 android:layout_weight="0.5"
                 android:layout_height="wrap_content"
                 android:contentDescription="@string/visit_takeda_website"
-                android:src="@drawable/logo_takeda_128"
+                android:src="@drawable/ic_logo_takeda"
                 android:onClick="viewTakedaSite" />
         </LinearLayout>
 
