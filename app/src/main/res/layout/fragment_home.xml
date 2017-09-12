@@ -105,7 +105,7 @@
                 android:layout_weight="0.5"
                 android:layout_height="wrap_content"
                 android:contentDescription="@string/visit_comed_website"
-                android:src="@drawable/logo_comed_128"
+                android:src="@drawable/ic_logo_comed"
                 android:onClick="viewComedSite" />
         </LinearLayout>
 
