@@ -74,7 +74,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="16dp"
                 android:contentDescription="@string/visit_museum_of_science_and_industry_website"
-                android:src="@drawable/logo_msi_128"
+                android:src="@drawable/ic_logo_msi"
                 android:onClick="viewMsiSite" />
             <ImageView
                 android:layout_width="0dp"
