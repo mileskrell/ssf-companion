@@ -98,7 +98,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="16dp"
                 android:contentDescription="@string/visit_bp_website"
-                android:src="@drawable/logo_bp_128"
+                android:src="@drawable/ic_logo_bp"
                 android:onClick="viewBpSite" />
             <ImageView
                 android:layout_width="0dp"
