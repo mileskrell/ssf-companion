@@ -121,7 +121,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="16dp"
                 android:contentDescription="@string/visit_motorola_solutions_foundation_website"
-                android:src="@drawable/logo_motorola_solutions_foundation_128"
+                android:src="@drawable/ic_logo_msf"
                 android:onClick="viewMotorolaSolutionsFoundationSite" />
             <ImageView
                 android:layout_width="0dp"
