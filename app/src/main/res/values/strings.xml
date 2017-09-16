@@ -67,4 +67,67 @@
 
     <string name="advise_a_student_email_subject">Advise-A-Student Program - Request for Help</string>
     <string name="advise_a_student_email_address">help@example.edu</string>
+
+    <!--Unit converter page-->
+    <string name="select_first_unit">Select first unit</string>
+    <string name="select_second_unit">Select second unit</string>
+    <string name="enter_units">Enter %s</string>
+
+    <!--Categories-->
+    <string name="distance">Distance</string>
+    <string name="mass">Mass</string>
+    <string name="volume">Volume</string>
+
+    <!--
+    Since I don't plan for this to be translated to anything more than
+    Spanish and Polish (if that), the translation rules are pretty simple.
+    Thankfully, none of the units are ever used in the singular.
+    -->
+
+    <!--Distance-->
+    <string name="inches">Inches</string>
+    <string name="feet">Feet</string>
+    <string name="yards">Yards</string>
+    <string name="miles">Miles</string>
+    <string name="millimeters">Millimeters</string>
+    <string name="centimeters">Centimeters</string>
+    <string name="meters">Meters</string>
+    <string name="kilometers">Kilometers</string>
+
+    <string name="inches_abbr">in</string>
+    <string name="feet_abbr">ft</string>
+    <string name="yards_abbr">yd</string>
+    <string name="miles_abbr">mi</string>
+    <string name="millimeters_abbr">mm</string>
+    <string name="centimeters_abbr">cm</string>
+    <string name="meters_abbr">m</string>
+    <string name="kilometers_abbr">km</string>
+
+    <!--Mass-->
+    <string name="ounces">Ounces</string>
+    <string name="pounds">Pounds</string>
+    <string name="milligrams">Milligrams</string>
+    <string name="grams">Grams</string>
+    <string name="kilograms">Kilograms</string>
+
+    <string name="ounces_abbr">oz</string>
+    <string name="pounds_abbr">lb</string>
+    <string name="milligrams_abbr">mg</string>
+    <string name="grams_abbr">g</string>
+    <string name="kilograms_abbr">kg</string>
+
+    <!--Volume-->
+    <string name="fluid_ounces">Fluid ounces</string>
+    <string name="pints">Pints</string>
+    <string name="quarts">Quarts</string>
+    <string name="gallons">Gallons</string>
+    <string name="milliliters">Milliliters</string>
+    <string name="liters">Liters</string>
+
+    <string name="fluid_ounces_abbr">fl oz</string>
+    <string name="pints_abbr">pt</string>
+    <string name="quarts_abbr">qt</string>
+    <string name="gallons_abbr">gal</string>
+    <string name="milliliters_abbr">ml</string>
+    <string name="liters_abbr">l</string>
 </resources>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:title="@string/fluid_ounces"
+        android:id="@+id/menu_volume_fluid_ounces" />
+    <item
+        android:title="@string/pints"
+        android:id="@+id/menu_volume_pints" />
+    <item
+        android:title="@string/quarts"
+        android:id="@+id/menu_volume_quarts" />
+    <item
+        android:title="@string/gallons"
+        android:id="@+id/menu_volume_gallons" />
+    <item
+        android:title="@string/milliliters"
+        android:id="@+id/menu_volume_milliliters" />
+    <item
+        android:title="@string/liters"
+        android:id="@+id/menu_volume_liters" />
+</menu>

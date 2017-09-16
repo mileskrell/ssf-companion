@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:title="@string/ounces"
+        android:id="@+id/menu_mass_ounces" />
+    <item
+        android:title="@string/pounds"
+        android:id="@+id/menu_mass_pounds" />
+    <item
+        android:title="@string/milligrams"
+        android:id="@+id/menu_mass_milligrams" />
+    <item
+        android:title="@string/grams"
+        android:id="@+id/menu_mass_grams" />
+    <item
+        android:title="@string/kilograms"
+        android:id="@+id/menu_mass_kilograms" />
+</menu>
