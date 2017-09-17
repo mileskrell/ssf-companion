@@ -56,7 +56,7 @@ public class EditTextDialogFragment extends DialogFragment {
     public Dialog onCreateDialog(final Bundle savedInstanceState) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
-        builder.setView(R.layout.dialog_fragment);
+        builder.setView(R.layout.dialog_fragment_edit_text);
         setCancelable(false);
 
         builder.setPositiveButton(R.string.okay, new DialogInterface.OnClickListener() {
