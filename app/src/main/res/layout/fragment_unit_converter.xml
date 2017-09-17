@@ -1,89 +1,91 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="org.cpsscifair.ssfcompanion.UnitConverterFragment">
-
-    <LinearLayout
+<layout>
+    <ScrollView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:paddingStart="@dimen/activity_horizontal_margin"
-        android:paddingEnd="@dimen/activity_horizontal_margin"
-        android:paddingTop="@dimen/activity_vertical_margin"
-        android:paddingBottom="@dimen/activity_vertical_margin">
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:drawableEnd="@drawable/ic_arrow_drop_down_black_24dp"
-            android:text="@string/select_first_unit"
-            style="@style/Widget.AppCompat.ButtonBar"
-            tools:text="@string/centimeters"
-            android:id="@+id/button_primary" />
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:drawableEnd="@drawable/ic_arrow_drop_down_black_24dp"
-            style="@style/Widget.AppCompat.ButtonBar"
-            android:visibility="gone"
-            tools:visibility="visible"
-            tools:text="@string/millimeters"
-            android:id="@+id/button_secondary" />
+        android:layout_height="match_parent"
+        tools:context="org.cpsscifair.ssfcompanion.UnitConverterFragment">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="64dp"
-            android:gravity="center"
-            android:visibility="gone"
-            tools:visibility="visible"
-            android:id="@+id/linear_layout_input">
+            android:orientation="vertical"
+            android:paddingStart="@dimen/activity_horizontal_margin"
+            android:paddingEnd="@dimen/activity_horizontal_margin"
+            android:paddingTop="@dimen/activity_vertical_margin"
+            android:paddingBottom="@dimen/activity_vertical_margin">
 
-            <EditText
+            <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:inputType="numberDecimal|numberSigned"
-                tools:text="123.45"
-                android:id="@+id/edit_text_input" />
+                android:drawableEnd="@drawable/ic_arrow_drop_down_black_24dp"
+                android:text="@string/select_first_unit"
+                style="@style/Widget.AppCompat.ButtonBar"
+                tools:text="@string/centimeters"
+                android:id="@+id/button_primary" />
 
-            <TextView
+            <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="4dp"
-                android:labelFor="@id/edit_text_input"
-                tools:text="@string/centimeters_abbr"
+                android:drawableEnd="@drawable/ic_arrow_drop_down_black_24dp"
+                style="@style/Widget.AppCompat.ButtonBar"
                 android:visibility="gone"
                 tools:visibility="visible"
-                android:id="@+id/unit_display_input" />
+                tools:text="@string/millimeters"
+                android:id="@+id/button_secondary" />
 
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="64dp"
-            android:gravity="center"
-            android:visibility="gone"
-            tools:visibility="visible"
-            android:id="@+id/linear_layout_output">
-
-            <TextView
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                tools:text="1234.5"
-                android:id="@+id/text_view_output" />
+                android:layout_marginTop="64dp"
+                android:gravity="center"
+                android:visibility="gone"
+                tools:visibility="visible"
+                android:id="@+id/linear_layout_input">
 
-            <TextView
-                android:layout_width="wrap_content"
+                <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:inputType="numberDecimal|numberSigned"
+                    tools:text="123.45"
+                    android:id="@+id/edit_text_input" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:labelFor="@id/edit_text_input"
+                    tools:text="@string/centimeters_abbr"
+                    android:visibility="gone"
+                    tools:visibility="visible"
+                    android:id="@+id/unit_display_input" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="4dp"
-                android:labelFor="@id/text_view_output"
-                tools:text="@string/millimeters_abbr"
-                android:id="@+id/unit_display_output" />
+                android:layout_marginTop="64dp"
+                android:gravity="center"
+                android:visibility="gone"
+                tools:visibility="visible"
+                android:id="@+id/linear_layout_output">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:text="1234.5"
+                    android:id="@+id/text_view_output" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:labelFor="@id/text_view_output"
+                    tools:text="@string/millimeters_abbr"
+                    android:id="@+id/unit_display_output" />
+            </LinearLayout>
         </LinearLayout>
-    </LinearLayout>
-</ScrollView>
+    </ScrollView>
+</layout>
