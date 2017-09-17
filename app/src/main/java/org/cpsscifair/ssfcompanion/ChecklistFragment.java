@@ -1,7 +1,7 @@
 package org.cpsscifair.ssfcompanion;
 
+import android.databinding.DataBindingUtil;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -11,7 +11,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import org.cpsscifair.ssfcompanion.databinding.FragmentChecklistBinding;
+
 public class ChecklistFragment extends Fragment {
+
+    private FragmentChecklistBinding binding;
 
     private ChecklistAdapter checklistAdapter;
 
@@ -30,17 +34,17 @@ public class ChecklistFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        final View v = inflater.inflate(R.layout.fragment_checklist, container, false);
+
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_checklist, container, false);
+        final View v = binding.getRoot();
 
         setHasOptionsMenu(true);
 
-        RecyclerView recyclerView = (RecyclerView) v.findViewById(R.id.checklist_recycler_view);
-
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        binding.checklistRecyclerView.setHasFixedSize(true);
+        binding.checklistRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
         checklistAdapter = new ChecklistAdapter(getContext(), getActivity().getSupportFragmentManager());
-        recyclerView.setAdapter(checklistAdapter);
+        binding.checklistRecyclerView.setAdapter(checklistAdapter);
 
         ItemTouchHelper.SimpleCallback callback = new ItemTouchHelper.SimpleCallback(ItemTouchHelper.UP | ItemTouchHelper.DOWN, ItemTouchHelper.START | ItemTouchHelper.END) {
             @Override
@@ -73,11 +77,9 @@ public class ChecklistFragment extends Fragment {
         };
 
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(callback);
-        itemTouchHelper.attachToRecyclerView(recyclerView);
+        itemTouchHelper.attachToRecyclerView(binding.checklistRecyclerView);
 
-        final FloatingActionButton floatingActionButton = (FloatingActionButton) v.findViewById(R.id.checklist_fab);
-
-        floatingActionButton.setOnClickListener(new View.OnClickListener() {
+        binding.checklistFab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 EditTextDialogFragment.newInstance()
