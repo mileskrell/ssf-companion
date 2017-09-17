@@ -1,6 +1,7 @@
 package org.cpsscifair.ssfcompanion;
 
 import android.content.Intent;
+import android.databinding.DataBindingUtil;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
@@ -8,10 +9,12 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.RadioGroup;
+
+import org.cpsscifair.ssfcompanion.databinding.FragmentAdviseAStudentBinding;
 
 public class AdviseAStudentFragment extends Fragment {
+
+    FragmentAdviseAStudentBinding binding;
 
     public AdviseAStudentFragment() {
         // Required empty public constructor
@@ -26,12 +29,10 @@ public class AdviseAStudentFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
 
-        View v = inflater.inflate(R.layout.fragment_advise_a_student, container, false);
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_advise_a_student, container, false);
+        View v = binding.getRoot();
 
-        final RadioGroup radioGroup = (RadioGroup) v.findViewById(R.id.radio_group);
-        Button getHelpButton = (Button) v.findViewById(R.id.get_help_button);
-
-        getHelpButton.setOnClickListener(new View.OnClickListener() {
+        binding.getHelpButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent getHelpIntent = new Intent(Intent.ACTION_SENDTO,
@@ -39,7 +40,7 @@ public class AdviseAStudentFragment extends Fragment {
 
                 getHelpIntent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.advise_a_student_email_subject));
 
-                switch (radioGroup.getCheckedRadioButtonId()) {
+                switch (binding.radioGroup.getCheckedRadioButtonId()) {
                     case R.id.radio_button_beginning:
                         getHelpIntent.putExtra(Intent.EXTRA_TEXT, getString(R.string.beginning_condition));
                         break;
