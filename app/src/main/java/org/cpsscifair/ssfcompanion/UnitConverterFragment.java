@@ -99,8 +99,9 @@ public class UnitConverterFragment extends Fragment {
                         if (oldSecondaryMenuType != null
                                 && oldSecondaryMenuType.equals(newSecondaryMenuType)) {
                             // Same kind of unit as before, so we don't need to clear anything
-                            // TODO: 9/16/17 Update the output here
-
+                            if (isInputNumeric()) {
+                                // TODO: 9/17/17 Do conversion here (user switched primary unit)
+                            }
                         } else {
                             // Different kind of unit, so we need to clear things
                             oldSecondaryMenuType = newSecondaryMenuType;
@@ -172,11 +173,12 @@ public class UnitConverterFragment extends Fragment {
                     binding.unitDisplayInput.setText(getAbbrFromUnit(unitPrimary));
                     binding.unitDisplayInput.setVisibility(View.VISIBLE);
 
-                    // TODO: 9/16/17 Do conversion here (user selected unit, then entered input)
-
-                    if (unitSecondary != null) {
+                    if (isInputNumeric() && unitSecondary != null) {
+                        // TODO: 9/17/17 Do conversion here (user selected unit, then entered input)
                         binding.unitDisplayOutput.setText(getAbbrFromUnit(unitSecondary));
                         binding.linearLayoutOutput.setVisibility(View.VISIBLE);
+                    } else {
+                        binding.linearLayoutOutput.setVisibility(View.GONE);
                     }
                 }
             }
@@ -210,14 +212,27 @@ public class UnitConverterFragment extends Fragment {
 
                 binding.linearLayoutInput.setVisibility(View.VISIBLE);
 
-                // Display output
-                // TODO: 9/16/17 Do conversion here (user entered input, then selected unit)
-                if (! inputString.isEmpty()) {
-                    binding.linearLayoutOutput.setVisibility(View.VISIBLE);
+                if (isInputNumeric()) {
+                    // TODO: 9/17/17 Do conversion here (user entered input, then selected unit)
                 }
                 return true;
             }
         });
+    }
+
+    private boolean isInputNumeric() {
+        switch (inputString) {
+            case "":
+                // We get here when the input is empty and the
+                // user switches to another compatible unit.
+                // Clearing input to make it empty gets caught by the TextWatcher instead.
+            case "-":
+            case ".":
+            case "-.":
+                return false;
+            default:
+                return true;
+        }
     }
 
     private Unit getUnitFromString(String unitString) {
