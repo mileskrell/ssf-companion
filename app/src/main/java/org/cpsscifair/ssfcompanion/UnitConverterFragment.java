@@ -117,8 +117,6 @@ public class UnitConverterFragment extends Fragment {
 
                             // Hide output LinearLayout
                             binding.linearLayoutOutput.setVisibility(View.GONE);
-
-                            binding.linearLayoutInput.setVisibility(View.VISIBLE);
                         }
 
                         // Set the input hint.
@@ -179,10 +177,6 @@ public class UnitConverterFragment extends Fragment {
                     if (unitSecondary != null) {
                         binding.unitDisplayOutput.setText(getAbbrFromUnit(unitSecondary));
                         binding.linearLayoutOutput.setVisibility(View.VISIBLE);
-                    } else {
-                        // This runs if the user selected a primary, then
-                        // typed something without selecting a secondary
-                        binding.unitDisplayOutput.setText(null);
                     }
                 }
             }
@@ -210,9 +204,11 @@ public class UnitConverterFragment extends Fragment {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
                 unitSecondary = getUnitFromString(item.getTitle().toString());
-
                 binding.buttonSecondary.setText(item.getTitle());
+
                 binding.unitDisplayOutput.setText(getAbbrFromUnit(unitSecondary));
+
+                binding.linearLayoutInput.setVisibility(View.VISIBLE);
 
                 // Display output
                 // TODO: 9/16/17 Do conversion here (user entered input, then selected unit)
