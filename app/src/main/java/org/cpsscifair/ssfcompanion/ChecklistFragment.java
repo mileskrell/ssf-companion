@@ -38,8 +38,6 @@ public class ChecklistFragment extends Fragment {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_checklist, container, false);
         final View v = binding.getRoot();
 
-        setHasOptionsMenu(true);
-
         binding.checklistRecyclerView.setHasFixedSize(true);
         binding.checklistRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
