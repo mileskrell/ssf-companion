@@ -1,21 +1,24 @@
 package org.cpsscifair.ssfcompanion;
 
 import android.content.Intent;
+import android.databinding.DataBindingUtil;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
 import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 
+import org.cpsscifair.ssfcompanion.databinding.ActivityNavDrawerBinding;
+
 public class NavDrawerActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    private ActivityNavDrawerBinding binding;
 
     private static final String TITLE = "action_bar_title";
 
@@ -24,22 +27,20 @@ public class NavDrawerActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_nav_drawer);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_nav_drawer);
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        setSupportActionBar(binding.appBarNavDrawer.toolbar);
+
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.setDrawerListener(toggle);
+                this, binding.drawerLayout, binding.appBarNavDrawer.toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        binding.drawerLayout.setDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
+        binding.navView.setNavigationItemSelectedListener(this);
 
         if (savedInstanceState == null) {
             // Add the HomeFragment
-            onNavigationItemSelected(navigationView.getMenu().findItem(R.id.nav_home));
+            onNavigationItemSelected(binding.navView.getMenu().findItem(R.id.nav_home));
         } else {
             // Set the title to whatever it was before
             getSupportActionBar().setTitle(savedInstanceState.getString(TITLE));
@@ -54,9 +55,8 @@ public class NavDrawerActivity extends AppCompatActivity
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
+        if (binding.drawerLayout.isDrawerOpen(GravityCompat.START)) {
+            binding.drawerLayout.closeDrawer(GravityCompat.START);
         } else {
             super.onBackPressed();
         }
@@ -113,8 +113,7 @@ public class NavDrawerActivity extends AppCompatActivity
                 break;
         }
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
+        binding.drawerLayout.closeDrawer(GravityCompat.START);
         return true;
     }
 
@@ -155,9 +154,9 @@ public class NavDrawerActivity extends AppCompatActivity
             startActivity(intent);
         } else {
             if (intent.getAction().equals(Intent.ACTION_SENDTO)) {
-                Snackbar.make(findViewById(R.id.drawer_layout), R.string.unable_to_compose_email, Snackbar.LENGTH_LONG).show();
+                Snackbar.make(binding.drawerLayout, R.string.unable_to_compose_email, Snackbar.LENGTH_LONG).show();
             } else {
-                Snackbar.make(findViewById(R.id.drawer_layout), R.string.unable_to_view_site, Snackbar.LENGTH_LONG).show();
+                Snackbar.make(binding.drawerLayout, R.string.unable_to_view_site, Snackbar.LENGTH_LONG).show();
             }
         }
     }
