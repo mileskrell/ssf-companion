@@ -1,5 +1,6 @@
 package org.cpsscifair.ssfcompanion;
 
+import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
@@ -8,17 +9,17 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.PopupMenu;
-import android.widget.TextView;
+
+import org.cpsscifair.ssfcompanion.databinding.FragmentUnitConverterBinding;
 
 // We're not using Spinners because they don't support submenus.
 
 // TODO: 9/16/17 Save instance state
 
 public class UnitConverterFragment extends Fragment {
+
+    private FragmentUnitConverterBinding binding;
 
     // Enum to represent the different menus for the second Button
     private enum SecondaryMenuType {
@@ -36,13 +37,7 @@ public class UnitConverterFragment extends Fragment {
 
     private Unit unitPrimary, unitSecondary;
 
-    private Button buttonPrimary, buttonSecondary;
     private PopupMenu popupMenuPrimary, popupMenuSecondary;
-
-    private LinearLayout linearLayoutInput, linearLayoutOutput;
-
-    private EditText editTextInput;
-    private TextView textViewOutput, unitDisplayInput, unitDisplayOutput;
 
     // The current text contained within editTextInput
     private String inputString ="";
@@ -59,19 +54,13 @@ public class UnitConverterFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View v = inflater.inflate(R.layout.fragment_unit_converter, container, false);
 
-        buttonPrimary = (Button) v.findViewById(R.id.button_primary);
-        buttonSecondary = (Button) v.findViewById(R.id.button_secondary);
-        linearLayoutInput = (LinearLayout) v.findViewById(R.id.linear_layout_input);
-        linearLayoutOutput = (LinearLayout) v.findViewById(R.id.linear_layout_output);
-        editTextInput = (EditText) v.findViewById(R.id.edit_text_input);
-        unitDisplayInput = (TextView) v.findViewById(R.id.unit_display_input);
-        unitDisplayOutput = (TextView) v.findViewById(R.id.unit_display_output);
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_unit_converter, container, false);
+        View v = binding.getRoot();
 
         // Set up the primary PopupMenu
 
-        popupMenuPrimary = new PopupMenu(getContext(), buttonPrimary);
+        popupMenuPrimary = new PopupMenu(getContext(), binding.buttonPrimary);
         popupMenuPrimary.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
@@ -86,7 +75,7 @@ public class UnitConverterFragment extends Fragment {
                         // If we're here, it means that the user has
                         // selected an actual item from the primary menu
                         unitPrimary = getUnitFromString(item.getTitle().toString());
-                        buttonPrimary.setText(item.getTitle());
+                        binding.buttonPrimary.setText(item.getTitle());
 
                         SecondaryMenuType newSecondaryMenuType = null;
 
@@ -120,26 +109,26 @@ public class UnitConverterFragment extends Fragment {
                             unitSecondary = null;
 
                             // Set the secondary Button's text to "Select second unit"
-                            buttonSecondary.setText(R.string.select_second_unit);
+                            binding.buttonSecondary.setText(R.string.select_second_unit);
 
                             // Make secondary Button visible (this
                             // only matters the first time around)
-                            buttonSecondary.setVisibility(View.VISIBLE);
+                            binding.buttonSecondary.setVisibility(View.VISIBLE);
 
                             // Hide output LinearLayout
-                            linearLayoutOutput.setVisibility(View.GONE);
+                            binding.linearLayoutOutput.setVisibility(View.GONE);
 
-                            linearLayoutInput.setVisibility(View.VISIBLE);
+                            binding.linearLayoutInput.setVisibility(View.VISIBLE);
                         }
 
                         // Set the input hint.
                         // In a language like German, this wouldn't be lower case,
                         // but it should work fine for most languages.
-                        editTextInput.setHint(getString(R.string.enter_units,
-                                buttonPrimary.getText().toString().toLowerCase()));
+                        binding.editTextInput.setHint(getString(R.string.enter_units,
+                                binding.buttonPrimary.getText().toString().toLowerCase()));
 
                         // Set the input unit abbreviation
-                        unitDisplayInput.setText(getAbbrFromUnit(unitPrimary));
+                        binding.unitDisplayInput.setText(getAbbrFromUnit(unitPrimary));
                 }
                 return true;
             }
@@ -148,14 +137,14 @@ public class UnitConverterFragment extends Fragment {
 
         // Set an OnClickListener for each Button
 
-        buttonPrimary.setOnClickListener(new View.OnClickListener() {
+        binding.buttonPrimary.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 popupMenuPrimary.show();
             }
         });
 
-        buttonSecondary.setOnClickListener(new View.OnClickListener() {
+        binding.buttonSecondary.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 popupMenuSecondary.show();
@@ -164,7 +153,7 @@ public class UnitConverterFragment extends Fragment {
 
         // Add the TextWatcher for the first EditText
 
-        editTextInput.addTextChangedListener(new TextWatcher() {
+        binding.editTextInput.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -179,21 +168,21 @@ public class UnitConverterFragment extends Fragment {
             public void afterTextChanged(Editable s) {
                 inputString = s.toString();
                 if (inputString.isEmpty()) {
-                    unitDisplayInput.setVisibility(View.GONE);
-                    linearLayoutOutput.setVisibility(View.GONE);
+                    binding.unitDisplayInput.setVisibility(View.GONE);
+                    binding.linearLayoutOutput.setVisibility(View.GONE);
                 } else {
-                    unitDisplayInput.setText(getAbbrFromUnit(unitPrimary));
-                    unitDisplayInput.setVisibility(View.VISIBLE);
+                    binding.unitDisplayInput.setText(getAbbrFromUnit(unitPrimary));
+                    binding.unitDisplayInput.setVisibility(View.VISIBLE);
 
                     // TODO: 9/16/17 Do conversion here (user selected unit, then entered input)
 
                     if (unitSecondary != null) {
-                        unitDisplayOutput.setText(getAbbrFromUnit(unitSecondary));
-                        linearLayoutOutput.setVisibility(View.VISIBLE);
+                        binding.unitDisplayOutput.setText(getAbbrFromUnit(unitSecondary));
+                        binding.linearLayoutOutput.setVisibility(View.VISIBLE);
                     } else {
                         // This runs if the user selected a primary, then
                         // typed something without selecting a secondary
-                        unitDisplayOutput.setText(null);
+                        binding.unitDisplayOutput.setText(null);
                     }
                 }
             }
@@ -203,7 +192,7 @@ public class UnitConverterFragment extends Fragment {
     }
 
     private void setSecondaryButtonMenu(SecondaryMenuType secondaryMenuType) {
-        popupMenuSecondary = new PopupMenu(getContext(), buttonSecondary);
+        popupMenuSecondary = new PopupMenu(getContext(), binding.buttonSecondary);
 
         switch (secondaryMenuType) {
             case DISTANCE:
@@ -222,13 +211,13 @@ public class UnitConverterFragment extends Fragment {
             public boolean onMenuItemClick(MenuItem item) {
                 unitSecondary = getUnitFromString(item.getTitle().toString());
 
-                buttonSecondary.setText(item.getTitle());
-                unitDisplayOutput.setText(getAbbrFromUnit(unitSecondary));
+                binding.buttonSecondary.setText(item.getTitle());
+                binding.unitDisplayOutput.setText(getAbbrFromUnit(unitSecondary));
 
                 // Display output
                 // TODO: 9/16/17 Do conversion here (user entered input, then selected unit)
                 if (! inputString.isEmpty()) {
-                    linearLayoutOutput.setVisibility(View.VISIBLE);
+                    binding.linearLayoutOutput.setVisibility(View.VISIBLE);
                 }
                 return true;
             }
