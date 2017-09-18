@@ -1,15 +1,20 @@
 package org.cpsscifair.ssfcompanion;
 
+import android.content.Context;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.PopupMenu;
+import android.widget.TextView;
 
 import org.cpsscifair.ssfcompanion.databinding.FragmentUnitConverterBinding;
 
@@ -181,6 +186,24 @@ public class UnitConverterFragment extends Fragment {
                         binding.linearLayoutOutput.setVisibility(View.GONE);
                     }
                 }
+            }
+        });
+
+        // Remove focus from EditText when user clicks IME "Done" button
+
+        binding.editTextInput.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if (actionId == EditorInfo.IME_ACTION_DONE) {
+                    // Remove focus
+                    v.clearFocus();
+
+                    // Close keyboard (otherwise it'll switch to a full keyboard)
+                    InputMethodManager imm = (InputMethodManager) getActivity()
+                            .getSystemService(Context.INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+                }
+                return false;
             }
         });
 
