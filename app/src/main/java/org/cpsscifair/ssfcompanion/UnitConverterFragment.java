@@ -20,32 +20,19 @@ import org.cpsscifair.ssfcompanion.databinding.FragmentUnitConverterBinding;
 
 // We're not using Spinners because they don't support submenus.
 
-// TODO: 9/16/17 Save instance state
-
 public class UnitConverterFragment extends Fragment {
+
+    // For saving instance state
+    private static final String UNIT_STRING_PRIMARY = "unit_string_primary";
+    private static final String UNIT_STRING_SECONDARY = "unit_string_secondary";
+    private static final String HAS_SEEN_EDIT_TEXT_INPUT = "has_seen_edit_text_input";
 
     private FragmentUnitConverterBinding binding;
 
-    // Enum to represent the different menus for the second Button
-    private enum SecondaryMenuType {
-        DISTANCE, MASS, VOLUME
-    }
-
-    private SecondaryMenuType oldSecondaryMenuType;
-
-    // Enum to represent the different units for each field
-    private enum Unit {
-        INCHES, FEET, YARDS, MILES, MILLIMETERS, CENTIMETERS, METERS, KILOMETERS,
-        OUNCES, POUNDS, MILLIGRAMS, GRAMS, KILOGRAMS,
-        FLUID_OUNCES, PINTS, QUARTS, GALLONS, MILLILITERS, LITERS
-    }
-
-    private Unit unitPrimary, unitSecondary;
+    // Boolean for whether the user has seen the input field before
+    private boolean hasSeenEditTextInput;
 
     private PopupMenu popupMenuPrimary, popupMenuSecondary;
-
-    // The current text contained within editTextInput
-    private String inputString ="";
 
     public UnitConverterFragment() {
         // Required empty public constructor
@@ -63,6 +50,30 @@ public class UnitConverterFragment extends Fragment {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_unit_converter, container, false);
         View v = binding.getRoot();
 
+        if (savedInstanceState != null) {
+            // Get the stored variables
+            Unit recoveredUnitPrimary = Unit.fromString(getResources(), savedInstanceState.getString(UNIT_STRING_PRIMARY));
+            Unit recoveredUnitSecondary = Unit.fromString(getResources(), savedInstanceState.getString(UNIT_STRING_SECONDARY));
+            boolean recoveredHasSeenEditTextInput = savedInstanceState.getBoolean(HAS_SEEN_EDIT_TEXT_INPUT);
+
+            if (! recoveredUnitSecondary.equals(Unit.EMPTY_UNIT)) {
+                // We have a primary AND secondary unit
+                onChangePrimaryUnit(recoveredUnitPrimary);
+                onChangeSecondaryUnit(recoveredUnitSecondary);
+            } else if (! recoveredUnitPrimary.equals(Unit.EMPTY_UNIT)) {
+                // We have a primary unit, but no secondary unit
+                onChangePrimaryUnit(recoveredUnitPrimary);
+            } else {
+                // We have no units; we don't have to set up anything new
+            }
+
+            if (recoveredHasSeenEditTextInput) {
+                // Make input field visible if user has seen it before
+                binding.editTextInput.setVisibility(View.VISIBLE);
+                hasSeenEditTextInput = true;
+            }
+        }
+
         // Set up the primary PopupMenu
 
         popupMenuPrimary = new PopupMenu(getContext(), binding.buttonPrimary);
@@ -79,60 +90,7 @@ public class UnitConverterFragment extends Fragment {
                     default:
                         // If we're here, it means that the user has
                         // selected an actual item from the primary menu
-                        unitPrimary = getUnitFromString(item.getTitle().toString());
-                        binding.buttonPrimary.setText(item.getTitle());
-
-                        SecondaryMenuType newSecondaryMenuType = null;
-
-                        // Depending on the type of item they selected,
-                        // set the secondary Button's menu
-                        switch (item.getGroupId()) {
-                            case R.id.menu_primary_group_distance:
-                                newSecondaryMenuType = SecondaryMenuType.DISTANCE;
-                                setSecondaryButtonMenu(SecondaryMenuType.DISTANCE);
-                                break;
-                            case R.id.menu_primary_group_mass:
-                                newSecondaryMenuType = SecondaryMenuType.MASS;
-                                setSecondaryButtonMenu(SecondaryMenuType.MASS);
-                                break;
-                            case R.id.menu_primary_group_volume:
-                                newSecondaryMenuType = SecondaryMenuType.VOLUME;
-                                setSecondaryButtonMenu(SecondaryMenuType.VOLUME);
-                                break;
-                        }
-
-                        if (oldSecondaryMenuType != null
-                                && oldSecondaryMenuType.equals(newSecondaryMenuType)) {
-                            // Same kind of unit as before, so we don't need to clear anything
-                            if (isInputNumeric()) {
-                                // TODO: 9/17/17 Do conversion here (user switched primary unit)
-                            }
-                        } else {
-                            // Different kind of unit, so we need to clear things
-                            oldSecondaryMenuType = newSecondaryMenuType;
-
-                            // Only matters if *not* first time
-                            unitSecondary = null;
-
-                            // Set the secondary Button's text to "Select second unit"
-                            binding.buttonSecondary.setText(R.string.select_second_unit);
-
-                            // Make secondary Button visible (this
-                            // only matters the first time around)
-                            binding.buttonSecondary.setVisibility(View.VISIBLE);
-
-                            // Hide output LinearLayout
-                            binding.linearLayoutOutput.setVisibility(View.GONE);
-                        }
-
-                        // Set the input hint.
-                        // In a language like German, this wouldn't be lower case,
-                        // but it should work fine for most languages.
-                        binding.editTextInput.setHint(getString(R.string.enter_units,
-                                binding.buttonPrimary.getText().toString().toLowerCase()));
-
-                        // Set the input unit abbreviation
-                        binding.unitDisplayInput.setText(getAbbrFromUnit(unitPrimary));
+                        onChangePrimaryUnit(Unit.fromString(getResources(), item.getTitle().toString()));
                 }
                 return true;
             }
@@ -170,22 +128,7 @@ public class UnitConverterFragment extends Fragment {
 
             @Override
             public void afterTextChanged(Editable s) {
-                inputString = s.toString();
-                if (inputString.isEmpty()) {
-                    binding.unitDisplayInput.setVisibility(View.GONE);
-                    binding.linearLayoutOutput.setVisibility(View.GONE);
-                } else {
-                    binding.unitDisplayInput.setText(getAbbrFromUnit(unitPrimary));
-                    binding.unitDisplayInput.setVisibility(View.VISIBLE);
-
-                    if (isInputNumeric() && unitSecondary != null) {
-                        // TODO: 9/17/17 Do conversion here (user selected unit, then entered input)
-                        binding.unitDisplayOutput.setText(getAbbrFromUnit(unitSecondary));
-                        binding.linearLayoutOutput.setVisibility(View.VISIBLE);
-                    } else {
-                        binding.linearLayoutOutput.setVisibility(View.GONE);
-                    }
-                }
+                onChangeInput(s.toString());
             }
         });
 
@@ -210,7 +153,95 @@ public class UnitConverterFragment extends Fragment {
         return v;
     }
 
-    private void setSecondaryButtonMenu(SecondaryMenuType secondaryMenuType) {
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        // When turning these back into units, they will become EMPTY_UNIT. No more null units!
+        outState.putString(UNIT_STRING_PRIMARY, getUnitPrimary().toString(getResources()));
+        outState.putString(UNIT_STRING_SECONDARY, getUnitSecondary().toString(getResources()));
+        outState.putBoolean(HAS_SEEN_EDIT_TEXT_INPUT, hasSeenEditTextInput);
+    }
+
+    private void onChangePrimaryUnit(Unit newUnitPrimary) {
+        Unit.UnitType oldPrimaryUnitType = getUnitPrimary().getType();
+
+        binding.buttonPrimary.setText(newUnitPrimary.toString(getResources()));
+
+        // Set the input hint.
+        // In a language like German, this wouldn't be lower case,
+        // but it should work fine for most languages.
+        binding.editTextInput.setHint(getString(R.string.enter_units,
+                getUnitPrimary().toString(getResources()).toLowerCase()));
+
+        // Set the input unit abbreviation
+        binding.unitDisplayInput.setText(newUnitPrimary.toAbbr(getResources()));
+
+        if (newUnitPrimary.getType().equals(oldPrimaryUnitType)) {
+            // Same unit type, so we need to convert
+            if (isInputNumeric()) {
+                // TODO: 9/18/17 Do conversion here (user switched primary unit)
+            }
+        } else {
+            // Unit types are different
+            onChangeSecondaryUnit(Unit.EMPTY_UNIT);
+        }
+    }
+
+    private void onChangeSecondaryUnit(Unit newUnitSecondary) {
+        if (! newUnitSecondary.equals(Unit.EMPTY_UNIT)) {
+            // Set secondary button text
+            binding.buttonSecondary.setText(newUnitSecondary.toString(getResources()));
+
+            // Set abbreviation to display in output
+            binding.unitDisplayOutput.setText(newUnitSecondary.toAbbr(getResources()));
+
+            // Make sure input field is visible (if this is the first
+            // time this unit is being set, it won't be visible)
+            binding.editTextInput.setVisibility(View.VISIBLE);
+            hasSeenEditTextInput = true;
+
+            if (isInputNumeric()) {
+                // TODO: 9/18/17 Do conversion here (user entered input, then selected unit)
+                binding.linearLayoutOutput.setVisibility(View.VISIBLE);
+            }
+        } else {
+            // Reset the secondary button
+
+            // Set the secondary Button's text to "Select second unit"
+            binding.buttonSecondary.setText(R.string.select_second_unit);
+
+            // Make secondary Button visible (this
+            // only matters the first time around)
+            binding.buttonSecondary.setVisibility(View.VISIBLE);
+
+            // Hide output LinearLayout
+            binding.linearLayoutOutput.setVisibility(View.GONE);
+
+            // Set secondary button menu
+            setSecondaryButtonMenu(getUnitPrimary().getType());
+        }
+    }
+
+    private void onChangeInput(String newInput) {
+
+        if (newInput.isEmpty()) {
+            binding.unitDisplayInput.setVisibility(View.GONE);
+            binding.linearLayoutOutput.setVisibility(View.GONE);
+        } else {
+            binding.unitDisplayInput.setText(getUnitPrimary().toAbbr(getResources()));
+            binding.unitDisplayInput.setVisibility(View.VISIBLE);
+
+            if (isInputNumeric() && ! getUnitSecondary().equals(Unit.EMPTY_UNIT)) {
+                // TODO: 9/18/17 Do conversion here (user selected unit, then entered input)
+                binding.unitDisplayOutput.setText(getUnitSecondary().toAbbr(getResources()));
+                binding.linearLayoutOutput.setVisibility(View.VISIBLE);
+            } else {
+                binding.linearLayoutOutput.setVisibility(View.GONE);
+            }
+        }
+    }
+
+    private void setSecondaryButtonMenu(Unit.UnitType secondaryMenuType) {
         popupMenuSecondary = new PopupMenu(getContext(), binding.buttonSecondary);
 
         switch (secondaryMenuType) {
@@ -228,23 +259,26 @@ public class UnitConverterFragment extends Fragment {
         popupMenuSecondary.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
-                unitSecondary = getUnitFromString(item.getTitle().toString());
-                binding.buttonSecondary.setText(item.getTitle());
-
-                binding.unitDisplayOutput.setText(getAbbrFromUnit(unitSecondary));
-
-                binding.linearLayoutInput.setVisibility(View.VISIBLE);
-
-                if (isInputNumeric()) {
-                    // TODO: 9/17/17 Do conversion here (user entered input, then selected unit)
-                }
+                onChangeSecondaryUnit(Unit.fromString(getResources(), item.getTitle().toString()));
                 return true;
             }
         });
     }
 
+    private Unit getUnitPrimary() {
+        return Unit.fromString(getResources(), binding.buttonPrimary.getText().toString());
+    }
+
+    private Unit getUnitSecondary() {
+        return Unit.fromString(getResources(), binding.buttonSecondary.getText().toString());
+    }
+
+    private String getInputString() {
+        return binding.editTextInput.getText().toString();
+    }
+
     private boolean isInputNumeric() {
-        switch (inputString) {
+        switch (getInputString()) {
             case "":
                 // We get here when the input is empty and the
                 // user switches to another compatible unit.
@@ -255,55 +289,6 @@ public class UnitConverterFragment extends Fragment {
                 return false;
             default:
                 return true;
-        }
-    }
-
-    private Unit getUnitFromString(String unitString) {
-        // Can't use a switch without using constants
-        if (unitString.equals(getString(R.string.inches))) {return Unit.INCHES;}
-        if (unitString.equals(getString(R.string.feet))) {return Unit.FEET;}
-        if (unitString.equals(getString(R.string.yards))) {return Unit.YARDS;}
-        if (unitString.equals(getString(R.string.miles))) {return Unit.MILES;}
-        if (unitString.equals(getString(R.string.millimeters))) {return Unit.MILLIMETERS;}
-        if (unitString.equals(getString(R.string.centimeters))) {return Unit.CENTIMETERS;}
-        if (unitString.equals(getString(R.string.meters))) {return Unit.METERS;}
-        if (unitString.equals(getString(R.string.kilometers))) {return Unit.KILOMETERS;}
-        if (unitString.equals(getString(R.string.ounces))) {return Unit.OUNCES;}
-        if (unitString.equals(getString(R.string.pounds))) {return Unit.POUNDS;}
-        if (unitString.equals(getString(R.string.milligrams))) {return Unit.MILLIGRAMS;}
-        if (unitString.equals(getString(R.string.grams))) {return Unit.GRAMS;}
-        if (unitString.equals(getString(R.string.kilograms))) {return Unit.KILOGRAMS;}
-        if (unitString.equals(getString(R.string.fluid_ounces))) {return Unit.FLUID_OUNCES;}
-        if (unitString.equals(getString(R.string.pints))) {return Unit.PINTS;}
-        if (unitString.equals(getString(R.string.quarts))) {return Unit.QUARTS;}
-        if (unitString.equals(getString(R.string.gallons))) {return Unit.GALLONS;}
-        if (unitString.equals(getString(R.string.milliliters))) {return Unit.MILLILITERS;}
-        if (unitString.equals(getString(R.string.liters))) {return Unit.LITERS;}
-        else {return null;}
-    }
-
-    private String getAbbrFromUnit(Unit unit) {
-        switch (unit) {
-            case INCHES: return getString(R.string.inches_abbr);
-            case FEET: return getString(R.string.feet_abbr);
-            case YARDS: return getString(R.string.yards_abbr);
-            case MILES: return getString(R.string.miles_abbr);
-            case MILLIMETERS: return getString(R.string.millimeters_abbr);
-            case CENTIMETERS: return getString(R.string.centimeters_abbr);
-            case METERS: return getString(R.string.meters_abbr);
-            case KILOMETERS: return getString(R.string.kilometers_abbr);
-            case OUNCES: return getString(R.string.ounces_abbr);
-            case POUNDS: return getString(R.string.pounds_abbr);
-            case MILLIGRAMS: return getString(R.string.milligrams_abbr);
-            case GRAMS: return getString(R.string.grams_abbr);
-            case KILOGRAMS: return getString(R.string.kilograms_abbr);
-            case FLUID_OUNCES: return getString(R.string.fluid_ounces_abbr);
-            case PINTS: return getString(R.string.pints_abbr);
-            case QUARTS: return getString(R.string.quarts_abbr);
-            case GALLONS: return getString(R.string.gallons_abbr);
-            case MILLILITERS: return getString(R.string.milliliters_abbr);
-            case LITERS: return getString(R.string.liters_abbr);
-            default: return null;
         }
     }
 }
