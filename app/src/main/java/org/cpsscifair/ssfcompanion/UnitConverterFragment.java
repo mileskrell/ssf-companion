@@ -29,9 +29,6 @@ public class UnitConverterFragment extends Fragment {
 
     private FragmentUnitConverterBinding binding;
 
-    // Boolean for whether the user has seen the input field before
-    private boolean hasSeenEditTextInput;
-
     private PopupMenu popupMenuPrimary, popupMenuSecondary;
 
     public UnitConverterFragment() {
@@ -70,7 +67,6 @@ public class UnitConverterFragment extends Fragment {
             if (recoveredHasSeenEditTextInput) {
                 // Make input field visible if user has seen it before
                 binding.editTextInput.setVisibility(View.VISIBLE);
-                hasSeenEditTextInput = true;
             }
         }
 
@@ -159,7 +155,7 @@ public class UnitConverterFragment extends Fragment {
         // When turning these back into units, they will become EMPTY_UNIT. No more null units!
         outState.putString(UNIT_STRING_PRIMARY, getUnitPrimary().toString(getResources()));
         outState.putString(UNIT_STRING_SECONDARY, getUnitSecondary().toString(getResources()));
-        outState.putBoolean(HAS_SEEN_EDIT_TEXT_INPUT, hasSeenEditTextInput);
+        outState.putBoolean(HAS_SEEN_EDIT_TEXT_INPUT, getHasSeenEditTextInput());
     }
 
     private void onChangePrimaryUnit(Unit newUnitPrimary) {
@@ -198,7 +194,6 @@ public class UnitConverterFragment extends Fragment {
             // Make sure input field is visible (if this is the first
             // time this unit is being set, it won't be visible)
             binding.editTextInput.setVisibility(View.VISIBLE);
-            hasSeenEditTextInput = true;
 
             if (isInputNumeric()) {
                 // TODO: 9/18/17 Do conversion here (user entered input, then selected unit)
@@ -275,6 +270,10 @@ public class UnitConverterFragment extends Fragment {
 
     private String getInputString() {
         return binding.editTextInput.getText().toString();
+    }
+
+    private boolean getHasSeenEditTextInput() {
+        return binding.editTextInput.getVisibility() == View.VISIBLE;
     }
 
     private boolean isInputNumeric() {
