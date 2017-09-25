@@ -69,30 +69,15 @@
 
             </LinearLayout>
 
-            <LinearLayout
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="48dp"
                 android:visibility="gone"
                 tools:visibility="visible"
-                android:id="@+id/linear_layout_output">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                    tools:text="1234.5"
-                    android:id="@+id/text_view_output" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="4dp"
-                    android:labelFor="@id/text_view_output"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                    tools:text="@string/millimeters_abbr"
-                    android:id="@+id/unit_display_output" />
-            </LinearLayout>
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                tools:text="1234.5 mm"
+                android:id="@+id/text_view_output" />
         </LinearLayout>
     </ScrollView>
 </layout>

@@ -177,7 +177,9 @@ public class UnitConverterFragment extends Fragment {
         if (newUnitPrimary.getType().equals(oldPrimaryUnitType)) {
             // Same unit type, so we need to convert
             if (isInputNumeric()) {
-                // TODO: 9/18/17 Do conversion here (user switched primary unit)
+                Quantity primaryQuantity = new Quantity(getResources(), getUnitPrimary(), getInputString());
+                String result = primaryQuantity.convertTo(getUnitSecondary()).toString();
+                binding.textViewOutput.setText(result);
             }
         } else {
             // Unit types are different
@@ -190,16 +192,15 @@ public class UnitConverterFragment extends Fragment {
             // Set secondary button text
             binding.buttonSecondary.setText(newUnitSecondary.toString(getResources()));
 
-            // Set abbreviation to display in output
-            binding.unitDisplayOutput.setText(newUnitSecondary.toAbbr(getResources()));
-
             // Make sure input field is visible (if this is the first
             // time this unit is being set, it won't be visible)
             binding.editTextInput.setVisibility(View.VISIBLE);
 
             if (isInputNumeric()) {
-                // TODO: 9/18/17 Do conversion here (user entered input, then selected unit)
-                binding.linearLayoutOutput.setVisibility(View.VISIBLE);
+                Quantity primaryQuantity = new Quantity(getResources(), getUnitPrimary(), getInputString());
+                String result = primaryQuantity.convertTo(getUnitSecondary()).toString();
+                binding.textViewOutput.setText(result);
+                binding.textViewOutput.setVisibility(View.VISIBLE);
             }
         } else {
             // Reset the secondary button
@@ -212,7 +213,7 @@ public class UnitConverterFragment extends Fragment {
             binding.buttonSecondary.setVisibility(View.VISIBLE);
 
             // Hide output LinearLayout
-            binding.linearLayoutOutput.setVisibility(View.GONE);
+            binding.textViewOutput.setVisibility(View.GONE);
 
             // Set secondary button menu
             setSecondaryButtonMenu(getUnitPrimary().getType());
@@ -223,7 +224,7 @@ public class UnitConverterFragment extends Fragment {
 
         if (newInput.isEmpty()) {
             binding.unitDisplayInput.setVisibility(View.GONE);
-            binding.linearLayoutOutput.setVisibility(View.GONE);
+            binding.textViewOutput.setVisibility(View.GONE);
             // Set hint
             binding.editTextInput.setHint(getString(R.string.enter_units,
                     getUnitPrimary().toString(getResources()).toLowerCase()));
@@ -234,11 +235,12 @@ public class UnitConverterFragment extends Fragment {
             binding.editTextInput.setHint("");
 
             if (isInputNumeric() && ! getUnitSecondary().equals(Unit.EMPTY_UNIT)) {
-                // TODO: 9/18/17 Do conversion here (user selected unit, then entered input)
-                binding.unitDisplayOutput.setText(getUnitSecondary().toAbbr(getResources()));
-                binding.linearLayoutOutput.setVisibility(View.VISIBLE);
+                Quantity primaryQuantity = new Quantity(getResources(), getUnitPrimary(), getInputString());
+                String result = primaryQuantity.convertTo(getUnitSecondary()).toString();
+                binding.textViewOutput.setText(result);
+                binding.textViewOutput.setVisibility(View.VISIBLE);
             } else {
-                binding.linearLayoutOutput.setVisibility(View.GONE);
+                binding.textViewOutput.setVisibility(View.GONE);
             }
         }
     }

@@ -2,6 +2,9 @@ package org.cpsscifair.ssfcompanion;
 
 import android.content.res.Resources;
 
+/**
+ * Represents a unit of measurement
+ */
 enum Unit {
     EMPTY_UNIT,
     INCHES, FEET, YARDS, MILES, MILLIMETERS, CENTIMETERS, METERS, KILOMETERS,
