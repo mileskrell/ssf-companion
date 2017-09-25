@@ -10,6 +10,7 @@
 
     <!--URLs-->
     <string name="calendar_url">http://www.cpsscifair.org/Current/current.html</string>
+    <string name="exhibit_categories_url">http://www.cpsscifair.org/Main/categories1.html</string>
     <string name="safety_guidelines_url">http://www.cpsscifair.org/Student/stu-safety.html</string>
 
     <string name="app_github_url">https://github.com/mileskrell/SSFCompanion</string>
@@ -22,6 +23,7 @@
 
     <string name="links">Links</string>
     <string name="calendar">Calendar</string>
+    <string name="exhibit_categories">Exhibit categories</string>
     <string name="safety_guidelines">Safety guidelines</string>
 
     <string name="about_this_app">About this app</string>

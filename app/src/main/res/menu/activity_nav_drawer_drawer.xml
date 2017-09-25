@@ -28,6 +28,10 @@
                 android:icon="@drawable/ic_event_black_24dp"
                 android:id="@+id/nav_calendar" />
             <item
+                android:title="@string/exhibit_categories"
+                android:icon="@drawable/ic_list_black_24dp"
+                android:id="@+id/nav_exhibit_categories" />
+            <item
                 android:title="@string/safety_guidelines"
                 android:icon="@drawable/ic_warning_black_24dp"
                 android:id="@+id/nav_safety_guidelines" />

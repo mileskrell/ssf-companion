@@ -97,6 +97,10 @@ public class NavDrawerActivity extends AppCompatActivity
                 safelyInvokeIntent(new Intent(Intent.ACTION_VIEW,
                         Uri.parse(getString(R.string.calendar_url))));
                 break;
+            case R.id.nav_exhibit_categories:
+                safelyInvokeIntent(new Intent(Intent.ACTION_VIEW,
+                        Uri.parse(getString(R.string.exhibit_categories_url))));
+                break;
             case R.id.nav_safety_guidelines:
                 safelyInvokeIntent(new Intent(Intent.ACTION_VIEW,
                         Uri.parse(getString(R.string.safety_guidelines_url))));
