@@ -163,11 +163,13 @@ public class UnitConverterFragment extends Fragment {
 
         binding.buttonPrimary.setText(newUnitPrimary.toString(getResources()));
 
-        // Set the input hint.
-        // In a language like German, this wouldn't be lower case,
-        // but it should work fine for most languages.
-        binding.editTextInput.setHint(getString(R.string.enter_units,
-                getUnitPrimary().toString(getResources()).toLowerCase()));
+        if (getInputString().isEmpty()) {
+            // Set the input hint.
+            // In a language like German, this wouldn't be lower case,
+            // but it should work fine for most languages.
+            binding.editTextInput.setHint(getString(R.string.enter_units,
+                    getUnitPrimary().toString(getResources()).toLowerCase()));
+        }
 
         // Set the input unit abbreviation
         binding.unitDisplayInput.setText(newUnitPrimary.toAbbr(getResources()));
@@ -222,9 +224,14 @@ public class UnitConverterFragment extends Fragment {
         if (newInput.isEmpty()) {
             binding.unitDisplayInput.setVisibility(View.GONE);
             binding.linearLayoutOutput.setVisibility(View.GONE);
+            // Set hint
+            binding.editTextInput.setHint(getString(R.string.enter_units,
+                    getUnitPrimary().toString(getResources()).toLowerCase()));
         } else {
             binding.unitDisplayInput.setText(getUnitPrimary().toAbbr(getResources()));
             binding.unitDisplayInput.setVisibility(View.VISIBLE);
+            // Clear hint
+            binding.editTextInput.setHint("");
 
             if (isInputNumeric() && ! getUnitSecondary().equals(Unit.EMPTY_UNIT)) {
                 // TODO: 9/18/17 Do conversion here (user selected unit, then entered input)
