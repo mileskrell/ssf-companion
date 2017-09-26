@@ -76,6 +76,7 @@
                 android:visibility="gone"
                 tools:visibility="visible"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:textAlignment="center"
                 tools:text="1234.5 mm"
                 android:id="@+id/text_view_output" />
         </LinearLayout>
