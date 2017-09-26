@@ -9,6 +9,7 @@ import java.math.BigDecimal;
  */
 class Quantity {
 
+    private static final int SCALE = 8;
     private static final BigDecimal HUNDRED = new BigDecimal("100");
     private static final BigDecimal THOUSAND = new BigDecimal("1000");
 
@@ -50,11 +51,20 @@ class Quantity {
 
     private String convertDistance(BigDecimal amount, Unit targetUnit) {
         BigDecimal amountMeters = BigDecimal.ZERO;
+        boolean inexact = false;
         switch (unit) {
-//            case INCHES: amountMeters = amount.; break;
-//            case FEET: amountMeters = amount.; break;
-//            case YARDS: amountMeters = amount.; break;
-//            case MILES: amountMeters = amount.; break;
+            case INCHES:
+                amountMeters = amount.multiply(new BigDecimal("0.0254"));
+                break;
+            case FEET:
+                amountMeters = amount.multiply(new BigDecimal("0.3048"));
+                break;
+            case YARDS:
+                amountMeters = amount.multiply(new BigDecimal("0.9144"));
+                break;
+            case MILES:
+                amountMeters = amount.multiply(new BigDecimal("1609.344"));
+                break;
             case MILLIMETERS:
                 amountMeters = amount.divide(THOUSAND);
                 break;
@@ -70,10 +80,38 @@ class Quantity {
         }
         BigDecimal amountFinal = BigDecimal.ZERO;
         switch (targetUnit) {
-//            case INCHES: return amountMeters.;
-//            case FEET: return amountMeters.;
-//            case YARDS: return amountMeters.;
-//            case MILES: return amountMeters.;
+            case INCHES:
+                try {
+                    amountFinal = amountMeters.divide(new BigDecimal("0.0254"));
+                } catch (ArithmeticException e) {
+                    amountFinal = amountMeters.divide(new BigDecimal("0.0254"), SCALE, BigDecimal.ROUND_HALF_UP);
+                    inexact = true;
+                }
+                break;
+            case FEET:
+                try {
+                    amountFinal = amountMeters.divide(new BigDecimal("0.3048"));
+                } catch (ArithmeticException e) {
+                    amountFinal = amountMeters.divide(new BigDecimal("0.3048"), SCALE, BigDecimal.ROUND_HALF_UP);
+                    inexact = true;
+                }
+                break;
+            case YARDS:
+                try {
+                    amountFinal = amountMeters.divide(new BigDecimal("0.9144"));
+                } catch (ArithmeticException e) {
+                    amountFinal = amountMeters.divide(new BigDecimal("0.9144"), SCALE, BigDecimal.ROUND_HALF_UP);
+                    inexact = true;
+                }
+                break;
+            case MILES:
+                try {
+                    amountFinal = amountMeters.divide(new BigDecimal("1609.344"));
+                } catch (ArithmeticException e) {
+                    amountFinal = amountMeters.divide(new BigDecimal("1609.344"), SCALE, BigDecimal.ROUND_HALF_UP);
+                    inexact = true;
+                }
+                break;
             case MILLIMETERS:
                 amountFinal = amountMeters.multiply(THOUSAND);
                 break;
@@ -87,11 +125,17 @@ class Quantity {
                 amountFinal = amountMeters.divide(THOUSAND);
                 break;
         }
-        return amountFinal.stripTrailingZeros().toPlainString();
+        String result = amountFinal.stripTrailingZeros().toPlainString();
+        if (inexact) {
+            return "≈ " + result;
+        } else {
+            return "= " + result;
+        }
     }
 
     private String convertMass(BigDecimal amount, Unit targetUnit) {
         BigDecimal amountGrams = BigDecimal.ZERO;
+        boolean inexact = false;
         switch (unit) {
 //            case OUNCES: amountGrams = amount.; break;
 //            case POUNDS: amountGrams = amount.; break;
@@ -119,11 +163,17 @@ class Quantity {
                 amountFinal = amountGrams.divide(THOUSAND);
                 break;
         }
-        return amountFinal.stripTrailingZeros().toPlainString();
+        String result = amountFinal.stripTrailingZeros().toPlainString();
+        if (inexact) {
+            return "≈ " + result;
+        } else {
+            return "= " + result;
+        }
     }
 
     private String convertVolume(BigDecimal amount, Unit targetUnit) {
         BigDecimal amountLiters = BigDecimal.ZERO;
+        boolean inexact = false;
         switch (unit) {
 //            case FLUID_OUNCES: amountLiters = amount.; break;
 //            case PINTS: amountLiters = amount.; break;
@@ -149,6 +199,11 @@ class Quantity {
                 amountFinal = amountLiters;
                 break;
         }
-        return amountFinal.stripTrailingZeros().toPlainString();
+        String result = amountFinal.stripTrailingZeros().toPlainString();
+        if (inexact) {
+            return "≈ " + result;
+        } else {
+            return "= " + result;
+        }
     }
 }
