@@ -87,7 +87,7 @@ class Quantity {
                 amountFinal = amountMeters.divide(THOUSAND);
                 break;
         }
-        return amountFinal.toString();
+        return amountFinal.stripTrailingZeros().toPlainString();
     }
 
     private String convertMass(BigDecimal amount, Unit targetUnit) {
@@ -119,7 +119,7 @@ class Quantity {
                 amountFinal = amountGrams.divide(THOUSAND);
                 break;
         }
-        return amountFinal.toString();
+        return amountFinal.stripTrailingZeros().toPlainString();
     }
 
     private String convertVolume(BigDecimal amount, Unit targetUnit) {
@@ -149,6 +149,6 @@ class Quantity {
                 amountFinal = amountLiters;
                 break;
         }
-        return amountFinal.toString();
+        return amountFinal.stripTrailingZeros().toPlainString();
     }
 }
