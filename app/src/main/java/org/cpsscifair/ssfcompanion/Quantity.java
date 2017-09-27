@@ -13,6 +13,13 @@ class Quantity {
     private static final BigDecimal HUNDRED = new BigDecimal("100");
     private static final BigDecimal THOUSAND = new BigDecimal("1000");
 
+    // Multiply by these to convert to the base unit.
+    // Divide by these to convert to the other unit.
+    private static final BigDecimal METERS_PER_INCH = new BigDecimal("0.0254");
+    private static final BigDecimal METERS_PER_FOOT = new BigDecimal("0.3048");
+    private static final BigDecimal METERS_PER_YARD = new BigDecimal("0.9144");
+    private static final BigDecimal METERS_PER_MILE = new BigDecimal("1609.344");
+
     private Resources res;
     private Unit unit;
     private String amount;
@@ -54,16 +61,16 @@ class Quantity {
         boolean inexact = false;
         switch (unit) {
             case INCHES:
-                amountMeters = amount.multiply(new BigDecimal("0.0254"));
+                amountMeters = amount.multiply(METERS_PER_INCH);
                 break;
             case FEET:
-                amountMeters = amount.multiply(new BigDecimal("0.3048"));
+                amountMeters = amount.multiply(METERS_PER_FOOT);
                 break;
             case YARDS:
-                amountMeters = amount.multiply(new BigDecimal("0.9144"));
+                amountMeters = amount.multiply(METERS_PER_YARD);
                 break;
             case MILES:
-                amountMeters = amount.multiply(new BigDecimal("1609.344"));
+                amountMeters = amount.multiply(METERS_PER_MILE);
                 break;
             case MILLIMETERS:
                 amountMeters = amount.divide(THOUSAND);
@@ -82,33 +89,33 @@ class Quantity {
         switch (targetUnit) {
             case INCHES:
                 try {
-                    amountFinal = amountMeters.divide(new BigDecimal("0.0254"));
+                    amountFinal = amountMeters.divide(METERS_PER_INCH);
                 } catch (ArithmeticException e) {
-                    amountFinal = amountMeters.divide(new BigDecimal("0.0254"), SCALE, BigDecimal.ROUND_HALF_UP);
+                    amountFinal = amountMeters.divide(METERS_PER_INCH, SCALE, BigDecimal.ROUND_HALF_UP);
                     inexact = true;
                 }
                 break;
             case FEET:
                 try {
-                    amountFinal = amountMeters.divide(new BigDecimal("0.3048"));
+                    amountFinal = amountMeters.divide(METERS_PER_FOOT);
                 } catch (ArithmeticException e) {
-                    amountFinal = amountMeters.divide(new BigDecimal("0.3048"), SCALE, BigDecimal.ROUND_HALF_UP);
+                    amountFinal = amountMeters.divide(METERS_PER_FOOT, SCALE, BigDecimal.ROUND_HALF_UP);
                     inexact = true;
                 }
                 break;
             case YARDS:
                 try {
-                    amountFinal = amountMeters.divide(new BigDecimal("0.9144"));
+                    amountFinal = amountMeters.divide(METERS_PER_YARD);
                 } catch (ArithmeticException e) {
-                    amountFinal = amountMeters.divide(new BigDecimal("0.9144"), SCALE, BigDecimal.ROUND_HALF_UP);
+                    amountFinal = amountMeters.divide(METERS_PER_YARD, SCALE, BigDecimal.ROUND_HALF_UP);
                     inexact = true;
                 }
                 break;
             case MILES:
                 try {
-                    amountFinal = amountMeters.divide(new BigDecimal("1609.344"));
+                    amountFinal = amountMeters.divide(METERS_PER_MILE);
                 } catch (ArithmeticException e) {
-                    amountFinal = amountMeters.divide(new BigDecimal("1609.344"), SCALE, BigDecimal.ROUND_HALF_UP);
+                    amountFinal = amountMeters.divide(METERS_PER_MILE, SCALE, BigDecimal.ROUND_HALF_UP);
                     inexact = true;
                 }
                 break;
