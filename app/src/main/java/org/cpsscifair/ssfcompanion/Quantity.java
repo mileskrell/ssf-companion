@@ -19,6 +19,8 @@ class Quantity {
     private static final BigDecimal METERS_PER_FOOT = new BigDecimal("0.3048");
     private static final BigDecimal METERS_PER_YARD = new BigDecimal("0.9144");
     private static final BigDecimal METERS_PER_MILE = new BigDecimal("1609.344");
+    private static final BigDecimal GRAMS_PER_OUNCE = new BigDecimal("28.349523125");
+    private static final BigDecimal GRAMS_PER_POUND = new BigDecimal("453.59237");
 
     private Resources res;
     private Unit unit;
@@ -144,8 +146,12 @@ class Quantity {
         BigDecimal amountGrams = BigDecimal.ZERO;
         boolean inexact = false;
         switch (unit) {
-//            case OUNCES: amountGrams = amount.; break;
-//            case POUNDS: amountGrams = amount.; break;
+            case OUNCES:
+                amountGrams = amount.multiply(GRAMS_PER_OUNCE);
+                break;
+            case POUNDS:
+                amountGrams = amount.multiply(GRAMS_PER_POUND);
+                break;
             case MILLIGRAMS:
                 amountGrams = amount.divide(THOUSAND);
                 break;
@@ -158,8 +164,22 @@ class Quantity {
         }
         BigDecimal amountFinal = BigDecimal.ZERO;
         switch (targetUnit) {
-//            case OUNCES: return amountGrams.;
-//            case POUNDS: return amountGrams.;
+            case OUNCES:
+                try {
+                    amountFinal = amountGrams.divide(GRAMS_PER_OUNCE);
+                } catch (ArithmeticException e) {
+                    amountFinal = amountGrams.divide(GRAMS_PER_OUNCE, SCALE, BigDecimal.ROUND_HALF_UP);
+                    inexact = true;
+                }
+                break;
+            case POUNDS:
+                try {
+                    amountFinal = amountGrams.divide(GRAMS_PER_POUND);
+                } catch (ArithmeticException e) {
+                    amountFinal = amountGrams.divide(GRAMS_PER_POUND, SCALE, BigDecimal.ROUND_HALF_UP);
+                    inexact = true;
+                }
+                break;
             case MILLIGRAMS:
                 amountFinal = amountGrams.multiply(THOUSAND);
                 break;
