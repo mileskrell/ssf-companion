@@ -21,6 +21,10 @@ class Quantity {
     private static final BigDecimal METERS_PER_MILE = new BigDecimal("1609.344");
     private static final BigDecimal GRAMS_PER_OUNCE = new BigDecimal("28.349523125");
     private static final BigDecimal GRAMS_PER_POUND = new BigDecimal("453.59237");
+    private static final BigDecimal LITERS_PER_FLUID_OUNCE = new BigDecimal("0.0295735295625"); // Unofficial source
+    private static final BigDecimal LITERS_PER_PINT = new BigDecimal("0.473176473"); // Unofficial source
+    private static final BigDecimal LITERS_PER_QUART = new BigDecimal("0.946352946"); // Unofficial source
+    private static final BigDecimal LITERS_PER_GALLON = new BigDecimal("3.785411784"); // Unofficial source
 
     private Resources res;
     private Unit unit;
@@ -202,10 +206,18 @@ class Quantity {
         BigDecimal amountLiters = BigDecimal.ZERO;
         boolean inexact = false;
         switch (unit) {
-//            case FLUID_OUNCES: amountLiters = amount.; break;
-//            case PINTS: amountLiters = amount.; break;
-//            case QUARTS: amountLiters = amount.; break;
-//            case GALLONS: amountLiters = amount.; break;
+            case FLUID_OUNCES:
+                amountLiters = amount.multiply(LITERS_PER_FLUID_OUNCE);
+                break;
+            case PINTS:
+                amountLiters = amount.multiply(LITERS_PER_PINT);
+                break;
+            case QUARTS:
+                amountLiters = amount.multiply(LITERS_PER_QUART);
+                break;
+            case GALLONS:
+                amountLiters = amount.multiply(LITERS_PER_GALLON);
+                break;
             case MILLILITERS:
                 amountLiters = amount.divide(THOUSAND);
                 break;
@@ -215,10 +227,38 @@ class Quantity {
         }
         BigDecimal amountFinal = BigDecimal.ZERO;
         switch (targetUnit) {
-//            case FLUID_OUNCES: return amountLiters.;
-//            case PINTS: return amountLiters.;
-//            case QUARTS: return amountLiters.;
-//            case GALLONS: return amountLiters.;
+            case FLUID_OUNCES:
+                try {
+                    amountFinal = amountLiters.divide(LITERS_PER_FLUID_OUNCE);
+                } catch (ArithmeticException e) {
+                    amountFinal = amountLiters.divide(LITERS_PER_FLUID_OUNCE, SCALE, BigDecimal.ROUND_HALF_UP);
+                    inexact = true;
+                }
+                break;
+            case PINTS:
+                try {
+                    amountFinal = amountLiters.divide(LITERS_PER_PINT);
+                } catch (ArithmeticException e) {
+                    amountFinal = amountLiters.divide(LITERS_PER_PINT, SCALE, BigDecimal.ROUND_HALF_UP);
+                    inexact = true;
+                }
+                break;
+            case QUARTS:
+                try {
+                    amountFinal = amountLiters.divide(LITERS_PER_QUART);
+                } catch (ArithmeticException e) {
+                    amountFinal = amountLiters.divide(LITERS_PER_QUART, SCALE, BigDecimal.ROUND_HALF_UP);
+                    inexact = true;
+                }
+                break;
+            case GALLONS:
+                try {
+                    amountFinal = amountLiters.divide(LITERS_PER_GALLON);
+                } catch (ArithmeticException e) {
+                    amountFinal = amountLiters.divide(LITERS_PER_GALLON, SCALE, BigDecimal.ROUND_HALF_UP);
+                    inexact = true;
+                }
+                break;
             case MILLILITERS:
                 amountFinal = amountLiters.multiply(THOUSAND);
                 break;
