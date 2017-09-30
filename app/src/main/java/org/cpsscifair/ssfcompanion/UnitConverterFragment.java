@@ -222,6 +222,11 @@ public class UnitConverterFragment extends Fragment {
 
     private void onChangeInput(String newInput) {
 
+        // Nothing else in this method should be run without a primary unit
+        if (getUnitPrimary() == Unit.EMPTY_UNIT) {
+            return;
+        }
+
         if (newInput.isEmpty()) {
             binding.unitDisplayInput.setVisibility(View.GONE);
             binding.textViewOutput.setVisibility(View.GONE);
