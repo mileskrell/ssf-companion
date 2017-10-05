@@ -58,7 +58,7 @@
                 android:layout_weight="0.5"
                 android:layout_height="wrap_content"
                 android:contentDescription="@string/visit_chicago_public_schools_website"
-                android:src="@drawable/logo_cps_128"
+                android:src="@drawable/logo_cps_640px"
                 android:onClick="viewCpsSite" />
         </LinearLayout>
 
