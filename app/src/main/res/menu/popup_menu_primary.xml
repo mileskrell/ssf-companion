@@ -58,6 +58,24 @@
     </item>
 
     <item
+        android:title="@string/temperature"
+        android:id="@+id/menu_primary_id_temperature">
+        <menu>
+            <group android:id="@+id/menu_primary_group_temperature">
+                <item
+                    android:title="@string/degrees_fahrenheit"
+                    android:id="@+id/menu_primary_temperature_degrees_fahrenheit" />
+                <item
+                    android:title="@string/degrees_celsius"
+                    android:id="@+id/menu_primary_temperature_degrees_celsius" />
+                <item
+                    android:title="@string/degrees_kelvin"
+                    android:id="@+id/menu_primary_temperature_degrees_kelvin" />
+            </group>
+        </menu>
+    </item>
+
+    <item
         android:title="@string/volume"
         android:id="@+id/menu_primary_id_volume">
         <menu>
