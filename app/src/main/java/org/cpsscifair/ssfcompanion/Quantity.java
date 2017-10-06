@@ -10,8 +10,13 @@ import java.math.BigDecimal;
 class Quantity {
 
     private static final int SCALE = 8;
+    private static final BigDecimal ONE_POINT_EIGHT = new BigDecimal("1.8");
+    private static final BigDecimal FIVE = new BigDecimal("5");
+    private static final BigDecimal NINE = new BigDecimal("9");
+    private static final BigDecimal THIRTY_TWO = new BigDecimal("32");
     private static final BigDecimal HUNDRED = new BigDecimal("100");
     private static final BigDecimal THOUSAND = new BigDecimal("1000");
+    private static final BigDecimal KELVIN_CELSIUS_DIFF = new BigDecimal("273.15");
 
     // Multiply by these to convert to the base unit.
     // Divide by these to convert to the other unit.
@@ -44,6 +49,13 @@ class Quantity {
 
     Quantity convertTo(Unit targetUnit) {
         BigDecimal amount = new BigDecimal(this.amount);
+
+        if (unit == targetUnit) {
+            // This is only needed for Fahrenheit to Fahrenheit,
+            // but it's used any time both units are the same.
+            return new Quantity(res, targetUnit, amount.stripTrailingZeros().toPlainString());
+        }
+
         String result = null;
 
         switch (unit.getType()) {
@@ -53,6 +65,9 @@ class Quantity {
                 break;
             case MASS:
                 result = convertMass(amount, targetUnit);
+                break;
+            case TEMPERATURE:
+                result = convertTemperature(amount, targetUnit);
                 break;
             case VOLUME:
                 result = convertVolume(amount, targetUnit);
@@ -192,6 +207,45 @@ class Quantity {
                 break;
             case KILOGRAMS:
                 amountFinal = amountGrams.divide(THOUSAND);
+                break;
+        }
+        String result = amountFinal.stripTrailingZeros().toPlainString();
+        if (inexact) {
+            return "≈ " + result;
+        } else {
+            return "= " + result;
+        }
+    }
+
+    private String convertTemperature(BigDecimal amount, Unit targetUnit) {
+        BigDecimal amountCelsius = BigDecimal.ZERO;
+        boolean inexact = false;
+        switch (unit) {
+            case DEGREES_FAHRENHEIT:
+                try {
+                    amountCelsius = amount.subtract(THIRTY_TWO).multiply(FIVE).divide(NINE);
+                } catch (ArithmeticException e) {
+                    amountCelsius = amount.subtract(THIRTY_TWO).multiply(FIVE).divide(NINE, SCALE, BigDecimal.ROUND_HALF_UP);
+                    inexact = true;
+                }
+                break;
+            case DEGREES_CELSIUS:
+                amountCelsius = amount;
+                break;
+            case DEGREES_KELVIN:
+                amountCelsius = amount.subtract(KELVIN_CELSIUS_DIFF);
+                break;
+        }
+        BigDecimal amountFinal = BigDecimal.ZERO;
+        switch (targetUnit) {
+            case DEGREES_FAHRENHEIT:
+                amountFinal = amountCelsius.multiply(ONE_POINT_EIGHT).add(THIRTY_TWO);
+                break;
+            case DEGREES_CELSIUS:
+                amountFinal = amountCelsius;
+                break;
+            case DEGREES_KELVIN:
+                amountFinal = amountCelsius.add(KELVIN_CELSIUS_DIFF);
                 break;
         }
         String result = amountFinal.stripTrailingZeros().toPlainString();
