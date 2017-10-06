@@ -153,22 +153,22 @@ public class UnitConverterFragment extends Fragment {
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         // When turning these back into units, they will become EMPTY_UNIT. No more null units!
-        outState.putString(UNIT_STRING_PRIMARY, getUnitPrimary().toString(getResources()));
-        outState.putString(UNIT_STRING_SECONDARY, getUnitSecondary().toString(getResources()));
+        outState.putString(UNIT_STRING_PRIMARY, getUnitPrimary().toUpperCaseString(getResources()));
+        outState.putString(UNIT_STRING_SECONDARY, getUnitSecondary().toUpperCaseString(getResources()));
         outState.putBoolean(HAS_SEEN_EDIT_TEXT_INPUT, getHasSeenEditTextInput());
     }
 
     private void onChangePrimaryUnit(Unit newUnitPrimary) {
         Unit.UnitType oldPrimaryUnitType = getUnitPrimary().getType();
 
-        binding.buttonPrimary.setText(newUnitPrimary.toString(getResources()));
+        binding.buttonPrimary.setText(newUnitPrimary.toUpperCaseString(getResources()));
 
         if (getInputString().isEmpty()) {
             // Set the input hint.
             // In a language like German, this wouldn't be lower case,
             // but it should work fine for most languages.
             binding.editTextInput.setHint(getString(R.string.enter_units,
-                    getUnitPrimary().toString(getResources()).toLowerCase()));
+                    getUnitPrimary().toUpperCaseString(getResources()).toLowerCase()));
         }
 
         // Set the input unit abbreviation
@@ -190,7 +190,7 @@ public class UnitConverterFragment extends Fragment {
     private void onChangeSecondaryUnit(Unit newUnitSecondary) {
         if (! newUnitSecondary.equals(Unit.EMPTY_UNIT)) {
             // Set secondary button text
-            binding.buttonSecondary.setText(newUnitSecondary.toString(getResources()));
+            binding.buttonSecondary.setText(newUnitSecondary.toUpperCaseString(getResources()));
 
             // Make sure input field is visible (if this is the first
             // time this unit is being set, it won't be visible)
@@ -232,7 +232,7 @@ public class UnitConverterFragment extends Fragment {
             binding.textViewOutput.setVisibility(View.GONE);
             // Set hint
             binding.editTextInput.setHint(getString(R.string.enter_units,
-                    getUnitPrimary().toString(getResources()).toLowerCase()));
+                    getUnitPrimary().toUpperCaseString(getResources()).toLowerCase()));
         } else {
             binding.unitDisplayInput.setText(getUnitPrimary().toAbbr(getResources()));
             binding.unitDisplayInput.setVisibility(View.VISIBLE);
