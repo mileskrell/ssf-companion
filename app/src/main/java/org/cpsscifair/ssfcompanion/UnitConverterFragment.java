@@ -79,6 +79,7 @@ public class UnitConverterFragment extends Fragment {
                 switch (item.getItemId()) {
                     case R.id.menu_primary_id_distance:
                     case R.id.menu_primary_id_mass:
+                    case R.id.menu_primary_id_temperature:
                     case R.id.menu_primary_id_volume:
                         // These are just categories, so clicking them
                         // should just open their respective submenus
@@ -165,10 +166,8 @@ public class UnitConverterFragment extends Fragment {
 
         if (getInputString().isEmpty()) {
             // Set the input hint.
-            // In a language like German, this wouldn't be lower case,
-            // but it should work fine for most languages.
             binding.editTextInput.setHint(getString(R.string.enter_units,
-                    getUnitPrimary().toUpperCaseString(getResources()).toLowerCase()));
+                    getUnitPrimary().toLowerCaseString(getResources())));
         }
 
         // Set the input unit abbreviation
@@ -232,7 +231,7 @@ public class UnitConverterFragment extends Fragment {
             binding.textViewOutput.setVisibility(View.GONE);
             // Set hint
             binding.editTextInput.setHint(getString(R.string.enter_units,
-                    getUnitPrimary().toUpperCaseString(getResources()).toLowerCase()));
+                    getUnitPrimary().toLowerCaseString(getResources())));
         } else {
             binding.unitDisplayInput.setText(getUnitPrimary().toAbbr(getResources()));
             binding.unitDisplayInput.setVisibility(View.VISIBLE);
@@ -259,6 +258,9 @@ public class UnitConverterFragment extends Fragment {
                 break;
             case MASS:
                 popupMenuSecondary.inflate(R.menu.popup_menu_mass);
+                break;
+            case TEMPERATURE:
+                popupMenuSecondary.inflate(R.menu.popup_menu_temperature);
                 break;
             case VOLUME:
                 popupMenuSecondary.inflate(R.menu.popup_menu_volume);

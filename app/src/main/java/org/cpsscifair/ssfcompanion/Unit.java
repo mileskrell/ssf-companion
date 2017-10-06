@@ -9,10 +9,11 @@ enum Unit {
     EMPTY_UNIT,
     INCHES, FEET, YARDS, MILES, MILLIMETERS, CENTIMETERS, METERS, KILOMETERS,
     OUNCES, POUNDS, MILLIGRAMS, GRAMS, KILOGRAMS,
+    DEGREES_FAHRENHEIT, DEGREES_CELSIUS, DEGREES_KELVIN,
     FLUID_OUNCES, PINTS, QUARTS, GALLONS, MILLILITERS, LITERS;
 
     enum UnitType {
-        EMPTY_TYPE, DISTANCE, MASS, VOLUME
+        EMPTY_TYPE, DISTANCE, MASS, TEMPERATURE, VOLUME
     }
 
     static Unit fromString(Resources res, String unitString) {
@@ -31,6 +32,9 @@ enum Unit {
             if (unitString.equals(res.getString(R.string.milligrams))) {return MILLIGRAMS;}
             if (unitString.equals(res.getString(R.string.grams))) {return GRAMS;}
             if (unitString.equals(res.getString(R.string.kilograms))) {return KILOGRAMS;}
+            if (unitString.equals(res.getString(R.string.degrees_fahrenheit))) {return DEGREES_FAHRENHEIT;}
+            if (unitString.equals(res.getString(R.string.degrees_celsius))) {return DEGREES_CELSIUS;}
+            if (unitString.equals(res.getString(R.string.degrees_kelvin))) {return DEGREES_KELVIN;}
             if (unitString.equals(res.getString(R.string.fluid_ounces))) {return FLUID_OUNCES;}
             if (unitString.equals(res.getString(R.string.pints))) {return PINTS;}
             if (unitString.equals(res.getString(R.string.quarts))) {return QUARTS;}
@@ -49,6 +53,8 @@ enum Unit {
             case OUNCES: case POUNDS:
             case MILLIGRAMS: case GRAMS: case KILOGRAMS:
                 return UnitType.MASS;
+            case DEGREES_FAHRENHEIT: case DEGREES_CELSIUS: case DEGREES_KELVIN:
+                return UnitType.TEMPERATURE;
             case FLUID_OUNCES: case PINTS: case QUARTS: case GALLONS:
             case MILLILITERS: case LITERS:
                 return UnitType.VOLUME;
@@ -72,6 +78,9 @@ enum Unit {
             case MILLIGRAMS: return res.getString(R.string.milligrams);
             case GRAMS: return res.getString(R.string.grams);
             case KILOGRAMS: return res.getString(R.string.kilograms);
+            case DEGREES_FAHRENHEIT: return res.getString(R.string.degrees_fahrenheit);
+            case DEGREES_CELSIUS: return res.getString(R.string.degrees_celsius);
+            case DEGREES_KELVIN: return res.getString(R.string.degrees_kelvin);
             case FLUID_OUNCES: return res.getString(R.string.fluid_ounces);
             case PINTS: return res.getString(R.string.pints);
             case QUARTS: return res.getString(R.string.quarts);
@@ -80,6 +89,11 @@ enum Unit {
             case LITERS: return res.getString(R.string.liters);
         }
         return null;
+    }
+
+    String toLowerCaseString(Resources res) {
+        String upperCase = toUpperCaseString(res);
+        return String.valueOf(upperCase.charAt(0)).toLowerCase() + upperCase.substring(1);
     }
 
     String toAbbr(Resources res) {
@@ -97,6 +111,9 @@ enum Unit {
             case MILLIGRAMS: return res.getString(R.string.milligrams_abbr);
             case GRAMS: return res.getString(R.string.grams_abbr);
             case KILOGRAMS: return res.getString(R.string.kilograms_abbr);
+            case DEGREES_FAHRENHEIT: return res.getString(R.string.degrees_fahrenheit_abbr);
+            case DEGREES_CELSIUS: return res.getString(R.string.degrees_celsius_abbr);
+            case DEGREES_KELVIN: return res.getString(R.string.degrees_kelvin_abbr);
             case FLUID_OUNCES: return res.getString(R.string.fluid_ounces_abbr);
             case PINTS: return res.getString(R.string.pints_abbr);
             case QUARTS: return res.getString(R.string.quarts_abbr);
