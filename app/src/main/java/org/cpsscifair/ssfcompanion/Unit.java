@@ -57,7 +57,7 @@ enum Unit {
         }
     }
 
-    String toString(Resources res) {
+    String toUpperCaseString(Resources res) {
         switch(this) {
             case INCHES: return res.getString(R.string.inches);
             case FEET: return res.getString(R.string.feet);
