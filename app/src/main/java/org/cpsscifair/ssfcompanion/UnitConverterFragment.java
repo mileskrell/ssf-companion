@@ -20,6 +20,9 @@ import org.cpsscifair.ssfcompanion.databinding.FragmentUnitConverterBinding;
 
 // We're not using Spinners because they don't support submenus.
 
+// TODO: 10/6/2017 Enable split-screen mode.
+// It's currently disabled because it causes problems if it's entered/exited while a PopupMenu is open.
+
 public class UnitConverterFragment extends Fragment {
 
     // For saving instance state
