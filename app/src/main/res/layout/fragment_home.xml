@@ -132,7 +132,7 @@
                 android:layout_weight="0.5"
                 android:layout_height="wrap_content"
                 android:contentDescription="@string/visit_peoples_gas_website"
-                android:src="@drawable/logo_peoples_gas_128"
+                android:src="@drawable/ic_logo_peoples_gas"
                 android:onClick="viewPeoplesGasSite" />
         </LinearLayout>
     </RelativeLayout>
