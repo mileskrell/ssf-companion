@@ -2,16 +2,23 @@
 <resources>
     <!--Misc-->
     <string name="app_name">SSF Companion</string>
-    <string name="my_email_address">feedback@example.edu</string>
+
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="unable_to_compose_email">Unable to compose email</string>
     <string name="unable_to_view_site">Unable to view site</string>
 
-    <!--URLs-->
+    <!--Email addresses, URLs, etc-->
+    <string name="advise_a_student_email_subject">Advise-A-Student Program - Request for Help</string>
+    <string name="advise_a_student_email_address">help@example.edu</string>
+
     <string name="calendar_url">http://www.cpsscifair.org/Current/current.html</string>
     <string name="exhibit_categories_url">http://www.cpsscifair.org/Main/categories1.html</string>
     <string name="safety_guidelines_url">http://www.cpsscifair.org/Student/stu-safety.html</string>
+
+    <string name="feedback_email_address">feedback@example.edu</string>
+    <string name="feedback_subject">SSF Companion Feedback</string>
+    <string name="feedback_body">Leave your feedback here, and I\'ll get back to you as soon as I can.</string>
 
     <string name="app_github_url">https://github.com/mileskrell/SSFCompanion</string>
 
@@ -67,9 +74,6 @@
 
     <string name="get_help_with_your_project">Get help with your project</string>
     <string name="please_select_an_option_first">Please select an option first</string>
-
-    <string name="advise_a_student_email_subject">Advise-A-Student Program - Request for Help</string>
-    <string name="advise_a_student_email_address">help@example.edu</string>
 
     <!--Unit converter page-->
     <string name="select_first_unit">Select first unit</string>

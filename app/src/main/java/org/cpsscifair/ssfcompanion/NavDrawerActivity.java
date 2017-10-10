@@ -107,8 +107,9 @@ public class NavDrawerActivity extends AppCompatActivity
                 break;
             case R.id.nav_send_feedback:
                 Intent sendFeedbackIntent = new Intent(Intent.ACTION_SENDTO,
-                        Uri.parse("mailto:" + getString(R.string.my_email_address)));
-                sendFeedbackIntent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.app_name));
+                        Uri.parse("mailto:" + getString(R.string.feedback_email_address)));
+                sendFeedbackIntent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.feedback_subject));
+                sendFeedbackIntent.putExtra(Intent.EXTRA_TEXT, getString(R.string.feedback_body));
                 safelyInvokeIntent(sendFeedbackIntent);
                 break;
             case R.id.nav_view_the_code:
