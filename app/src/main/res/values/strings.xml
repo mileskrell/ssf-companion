@@ -124,6 +124,15 @@
     <string name="grams_abbr">g</string>
     <string name="kilograms_abbr">kg</string>
 
+    <!--Temperature-->
+    <string name="degrees_fahrenheit">Degrees Fahrenheit</string>
+    <string name="degrees_celsius">Degrees Celsius</string>
+    <string name="degrees_kelvin">Degrees Kelvin</string>
+
+    <string name="degrees_fahrenheit_abbr">°F</string>
+    <string name="degrees_celsius_abbr">°C</string>
+    <string name="degrees_kelvin_abbr">°K</string>
+
     <!--Volume-->
     <string name="fluid_ounces">Fluid ounces</string>
     <string name="pints">Pints</string>
@@ -138,13 +147,4 @@
     <string name="gallons_abbr">gal</string>
     <string name="milliliters_abbr">ml</string>
     <string name="liters_abbr">l</string>
-
-    <!--Temperature-->
-    <string name="degrees_fahrenheit">Degrees Fahrenheit</string>
-    <string name="degrees_celsius">Degrees Celsius</string>
-    <string name="degrees_kelvin">Degrees Kelvin</string>
-
-    <string name="degrees_fahrenheit_abbr">°F</string>
-    <string name="degrees_celsius_abbr">°C</string>
-    <string name="degrees_kelvin_abbr">°K</string>
 </resources>
