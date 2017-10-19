@@ -4,32 +4,14 @@
         android:title="@string/distance"
         android:id="@+id/menu_primary_id_distance">
         <menu>
-            <group android:id="@+id/menu_primary_group_distance">
-                <item
-                    android:title="@string/inches"
-                    android:id="@+id/menu_primary_distance_inches" />
-                <item
-                    android:title="@string/feet"
-                    android:id="@+id/menu_primary_distance_feet" />
-                <item
-                    android:title="@string/yards"
-                    android:id="@+id/menu_primary_distance_yards" />
-                <item
-                    android:title="@string/miles"
-                    android:id="@+id/menu_primary_distance_miles" />
-                <item
-                    android:title="@string/millimeters"
-                    android:id="@+id/menu_primary_distance_millimeters" />
-                <item
-                    android:title="@string/centimeters"
-                    android:id="@+id/menu_primary_distance_centimeter" />
-                <item
-                    android:title="@string/meters"
-                    android:id="@+id/menu_primary_distance_meter" />
-                <item
-                    android:title="@string/kilometers"
-                    android:id="@+id/menu_primary_distance_kilometer" />
-            </group>
+            <item android:title="@string/inches" />
+            <item android:title="@string/feet" />
+            <item android:title="@string/yards" />
+            <item android:title="@string/miles" />
+            <item android:title="@string/millimeters" />
+            <item android:title="@string/centimeters" />
+            <item android:title="@string/meters" />
+            <item android:title="@string/kilometers" />
         </menu>
     </item>
 
@@ -37,23 +19,11 @@
         android:title="@string/mass"
         android:id="@+id/menu_primary_id_mass">
         <menu>
-            <group android:id="@+id/menu_primary_group_mass">
-                <item
-                    android:title="@string/ounces"
-                    android:id="@+id/menu_primary_mass_ounces" />
-                <item
-                    android:title="@string/pounds"
-                    android:id="@+id/menu_primary_mass_pounds" />
-                <item
-                    android:title="@string/milligrams"
-                    android:id="@+id/menu_primary_mass_milligrams" />
-                <item
-                    android:title="@string/grams"
-                    android:id="@+id/menu_primary_mass_grams" />
-                <item
-                    android:title="@string/kilograms"
-                    android:id="@+id/menu_primary_mass_kilograms" />
-            </group>
+            <item android:title="@string/ounces" />
+            <item android:title="@string/pounds" />
+            <item android:title="@string/milligrams" />
+            <item android:title="@string/grams" />
+            <item android:title="@string/kilograms" />
         </menu>
     </item>
 
@@ -61,17 +31,9 @@
         android:title="@string/temperature"
         android:id="@+id/menu_primary_id_temperature">
         <menu>
-            <group android:id="@+id/menu_primary_group_temperature">
-                <item
-                    android:title="@string/degrees_fahrenheit"
-                    android:id="@+id/menu_primary_temperature_degrees_fahrenheit" />
-                <item
-                    android:title="@string/degrees_celsius"
-                    android:id="@+id/menu_primary_temperature_degrees_celsius" />
-                <item
-                    android:title="@string/degrees_kelvin"
-                    android:id="@+id/menu_primary_temperature_degrees_kelvin" />
-            </group>
+            <item android:title="@string/degrees_fahrenheit" />
+            <item android:title="@string/degrees_celsius" />
+            <item android:title="@string/degrees_kelvin" />
         </menu>
     </item>
 
@@ -79,26 +41,12 @@
         android:title="@string/volume"
         android:id="@+id/menu_primary_id_volume">
         <menu>
-            <group android:id="@+id/menu_primary_group_volume">
-                <item
-                    android:title="@string/fluid_ounces"
-                    android:id="@+id/menu_primary_volume_fluid_ounces" />
-                <item
-                    android:title="@string/pints"
-                    android:id="@+id/menu_primary_volume_pints" />
-                <item
-                    android:title="@string/quarts"
-                    android:id="@+id/menu_primary_volume_quarts" />
-                <item
-                    android:title="@string/gallons"
-                    android:id="@+id/menu_primary_volume_gallons" />
-                <item
-                    android:title="@string/milliliters"
-                    android:id="@+id/menu_primary_volume_milliliters" />
-                <item
-                    android:title="@string/liters"
-                    android:id="@+id/menu_primary_volume_liters" />
-            </group>
+            <item android:title="@string/fluid_ounces" />
+            <item android:title="@string/pints" />
+            <item android:title="@string/quarts" />
+            <item android:title="@string/gallons" />
+            <item android:title="@string/milliliters" />
+            <item android:title="@string/liters" />
         </menu>
     </item>
 </menu>

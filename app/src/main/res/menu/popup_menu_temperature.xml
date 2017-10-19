@@ -1,12 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item
-        android:title="@string/degrees_fahrenheit"
-        android:id="@+id/menu_temperature_fahrenheit" />
-    <item
-        android:title="@string/degrees_celsius"
-        android:id="@+id/menu_temperature_celsius" />
-    <item
-        android:title="@string/degrees_kelvin"
-        android:id="@+id/menu_temperature_kelvin" />
+    <item android:title="@string/degrees_fahrenheit" />
+    <item android:title="@string/degrees_celsius" />
+    <item android:title="@string/degrees_kelvin" />
 </menu>
