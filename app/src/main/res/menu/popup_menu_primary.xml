@@ -41,7 +41,10 @@
         android:title="@string/volume"
         android:id="@+id/menu_primary_id_volume">
         <menu>
+            <item android:title="@string/teaspoons" />
+            <item android:title="@string/tablespoons" />
             <item android:title="@string/fluid_ounces" />
+            <item android:title="@string/cups" />
             <item android:title="@string/pints" />
             <item android:title="@string/quarts" />
             <item android:title="@string/gallons" />

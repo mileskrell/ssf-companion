@@ -10,7 +10,7 @@ enum Unit {
     INCHES, FEET, YARDS, MILES, MILLIMETERS, CENTIMETERS, METERS, KILOMETERS,
     OUNCES, POUNDS, MILLIGRAMS, GRAMS, KILOGRAMS,
     DEGREES_FAHRENHEIT, DEGREES_CELSIUS, DEGREES_KELVIN,
-    FLUID_OUNCES, PINTS, QUARTS, GALLONS, MILLILITERS, LITERS;
+    TEASPOONS, TABLESPOONS, FLUID_OUNCES, CUPS, PINTS, QUARTS, GALLONS, MILLILITERS, LITERS;
 
     enum UnitType {
         EMPTY_TYPE, DISTANCE, MASS, TEMPERATURE, VOLUME
@@ -35,7 +35,10 @@ enum Unit {
             if (unitString.equals(res.getString(R.string.degrees_fahrenheit))) {return DEGREES_FAHRENHEIT;}
             if (unitString.equals(res.getString(R.string.degrees_celsius))) {return DEGREES_CELSIUS;}
             if (unitString.equals(res.getString(R.string.degrees_kelvin))) {return DEGREES_KELVIN;}
+            if (unitString.equals(res.getString(R.string.teaspoons))) {return TEASPOONS;}
+            if (unitString.equals(res.getString(R.string.tablespoons))) {return TABLESPOONS;}
             if (unitString.equals(res.getString(R.string.fluid_ounces))) {return FLUID_OUNCES;}
+            if (unitString.equals(res.getString(R.string.cups))) {return CUPS;}
             if (unitString.equals(res.getString(R.string.pints))) {return PINTS;}
             if (unitString.equals(res.getString(R.string.quarts))) {return QUARTS;}
             if (unitString.equals(res.getString(R.string.gallons))) {return GALLONS;}
@@ -55,7 +58,8 @@ enum Unit {
                 return UnitType.MASS;
             case DEGREES_FAHRENHEIT: case DEGREES_CELSIUS: case DEGREES_KELVIN:
                 return UnitType.TEMPERATURE;
-            case FLUID_OUNCES: case PINTS: case QUARTS: case GALLONS:
+            case TEASPOONS: case TABLESPOONS: case FLUID_OUNCES: case CUPS:
+            case PINTS: case QUARTS: case GALLONS:
             case MILLILITERS: case LITERS:
                 return UnitType.VOLUME;
             default:
@@ -81,7 +85,10 @@ enum Unit {
             case DEGREES_FAHRENHEIT: return res.getString(R.string.degrees_fahrenheit);
             case DEGREES_CELSIUS: return res.getString(R.string.degrees_celsius);
             case DEGREES_KELVIN: return res.getString(R.string.degrees_kelvin);
+            case TEASPOONS: return res.getString(R.string.teaspoons);
+            case TABLESPOONS: return res.getString(R.string.tablespoons);
             case FLUID_OUNCES: return res.getString(R.string.fluid_ounces);
+            case CUPS: return res.getString(R.string.cups);
             case PINTS: return res.getString(R.string.pints);
             case QUARTS: return res.getString(R.string.quarts);
             case GALLONS: return res.getString(R.string.gallons);
@@ -114,7 +121,10 @@ enum Unit {
             case DEGREES_FAHRENHEIT: return res.getString(R.string.degrees_fahrenheit_abbr);
             case DEGREES_CELSIUS: return res.getString(R.string.degrees_celsius_abbr);
             case DEGREES_KELVIN: return res.getString(R.string.degrees_kelvin_abbr);
+            case TEASPOONS: return res.getString(R.string.teaspoons_abbr);
+            case TABLESPOONS: return res.getString(R.string.tablespoons_abbr);
             case FLUID_OUNCES: return res.getString(R.string.fluid_ounces_abbr);
+            case CUPS: return res.getString(R.string.cups_abbr);
             case PINTS: return res.getString(R.string.pints_abbr);
             case QUARTS: return res.getString(R.string.quarts_abbr);
             case GALLONS: return res.getString(R.string.gallons_abbr);
