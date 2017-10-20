@@ -26,10 +26,14 @@ class Quantity {
     private static final BigDecimal METERS_PER_MILE = new BigDecimal("1609.344");
     private static final BigDecimal GRAMS_PER_OUNCE = new BigDecimal("28.349523125");
     private static final BigDecimal GRAMS_PER_POUND = new BigDecimal("453.59237");
-    private static final BigDecimal LITERS_PER_FLUID_OUNCE = new BigDecimal("0.0295735295625"); // Unofficial source
-    private static final BigDecimal LITERS_PER_PINT = new BigDecimal("0.473176473"); // Unofficial source
-    private static final BigDecimal LITERS_PER_QUART = new BigDecimal("0.946352946"); // Unofficial source
-    private static final BigDecimal LITERS_PER_GALLON = new BigDecimal("3.785411784"); // Unofficial source
+    // Volume factors are unofficial, but appear to be correct
+    private static final BigDecimal LITERS_PER_TEASPOON = new BigDecimal("0.00492892159375");
+    private static final BigDecimal LITERS_PER_TABLESPOON = new BigDecimal("0.01478676478125");
+    private static final BigDecimal LITERS_PER_FLUID_OUNCE = new BigDecimal("0.0295735295625");
+    private static final BigDecimal LITERS_PER_CUP = new BigDecimal("0.2365882365");
+    private static final BigDecimal LITERS_PER_PINT = new BigDecimal("0.473176473");
+    private static final BigDecimal LITERS_PER_QUART = new BigDecimal("0.946352946");
+    private static final BigDecimal LITERS_PER_GALLON = new BigDecimal("3.785411784");
 
     private Resources res;
     private Unit unit;
@@ -260,8 +264,17 @@ class Quantity {
         BigDecimal amountLiters = BigDecimal.ZERO;
         boolean inexact = false;
         switch (unit) {
+            case TEASPOONS:
+                amountLiters = amount.multiply(LITERS_PER_TEASPOON);
+                break;
+            case TABLESPOONS:
+                amountLiters = amount.multiply(LITERS_PER_TABLESPOON);
+                break;
             case FLUID_OUNCES:
                 amountLiters = amount.multiply(LITERS_PER_FLUID_OUNCE);
+                break;
+            case CUPS:
+                amountLiters = amount.multiply(LITERS_PER_CUP);
                 break;
             case PINTS:
                 amountLiters = amount.multiply(LITERS_PER_PINT);
@@ -281,11 +294,35 @@ class Quantity {
         }
         BigDecimal amountFinal = BigDecimal.ZERO;
         switch (targetUnit) {
+            case TEASPOONS:
+                try {
+                    amountFinal = amountLiters.divide(LITERS_PER_TEASPOON);
+                } catch (ArithmeticException e) {
+                    amountFinal = amountLiters.divide(LITERS_PER_TEASPOON, SCALE, BigDecimal.ROUND_HALF_UP);
+                    inexact = true;
+                }
+                break;
+            case TABLESPOONS:
+                try {
+                    amountFinal = amountLiters.divide(LITERS_PER_TABLESPOON);
+                } catch (ArithmeticException e) {
+                    amountFinal = amountLiters.divide(LITERS_PER_TABLESPOON, SCALE, BigDecimal.ROUND_HALF_UP);
+                    inexact = true;
+                }
+                break;
             case FLUID_OUNCES:
                 try {
                     amountFinal = amountLiters.divide(LITERS_PER_FLUID_OUNCE);
                 } catch (ArithmeticException e) {
                     amountFinal = amountLiters.divide(LITERS_PER_FLUID_OUNCE, SCALE, BigDecimal.ROUND_HALF_UP);
+                    inexact = true;
+                }
+                break;
+            case CUPS:
+                try {
+                    amountFinal = amountLiters.divide(LITERS_PER_CUP);
+                } catch (ArithmeticException e) {
+                    amountFinal = amountLiters.divide(LITERS_PER_CUP, SCALE, BigDecimal.ROUND_HALF_UP);
                     inexact = true;
                 }
                 break;
