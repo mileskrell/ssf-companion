@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.graphics.drawable.DrawableCompat;
 import android.text.Editable;
+import android.text.InputType;
 import android.text.TextWatcher;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -177,9 +178,18 @@ public class UnitConverterFragment extends Fragment {
             binding.editTextInput.setVisibility(View.INVISIBLE);
             binding.unitDisplayInput.setVisibility(View.INVISIBLE);
             binding.textViewOutput.setVisibility(View.INVISIBLE);
-            // Also reset user input and hide keyboard
+            // Clear user input
             binding.editTextInput.setText("");
+            // Hide keyboard
             clearFocusAndHideKeyboard();
+            // Allow negatives in input only for temperature
+            if (currentUnitType == Unit.UnitType.TEMPERATURE) {
+                binding.editTextInput.setInputType(InputType.TYPE_CLASS_NUMBER
+                        | InputType.TYPE_NUMBER_FLAG_DECIMAL | InputType.TYPE_NUMBER_FLAG_SIGNED);
+            } else {
+                binding.editTextInput.setInputType(InputType.TYPE_CLASS_NUMBER
+                        | InputType.TYPE_NUMBER_FLAG_DECIMAL);
+            }
 
             // Changing a spinner's adapter counts as selecting whatever the new item is.
             // And those listeners call the respective onChange methods, setting the units to empty.
