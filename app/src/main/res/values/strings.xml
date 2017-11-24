@@ -93,14 +93,16 @@
     -->
 
     <!--Distance-->
-    <string name="inches">Inches</string>
-    <string name="feet">Feet</string>
-    <string name="yards">Yards</string>
-    <string name="miles">Miles</string>
-    <string name="millimeters">Millimeters</string>
-    <string name="centimeters">Centimeters</string>
-    <string name="meters">Meters</string>
-    <string name="kilometers">Kilometers</string>
+    <string-array name="units_distance">
+        <item>Inches</item>
+        <item>Feet</item>
+        <item>Yards</item>
+        <item>Miles</item>
+        <item>Millimeters</item>
+        <item>Centimeters</item>
+        <item>Meters</item>
+        <item>Kilometers</item>
+    </string-array>
 
     <string name="inches_abbr">in</string>
     <string name="feet_abbr">ft</string>
@@ -112,11 +114,13 @@
     <string name="kilometers_abbr">km</string>
 
     <!--Mass-->
-    <string name="ounces">Ounces</string>
-    <string name="pounds">Pounds</string>
-    <string name="milligrams">Milligrams</string>
-    <string name="grams">Grams</string>
-    <string name="kilograms">Kilograms</string>
+    <string-array name="units_mass">
+        <item>Ounces</item>
+        <item>Pounds</item>
+        <item>Milligrams</item>
+        <item>Grams</item>
+        <item>Kilograms</item>
+    </string-array>
 
     <string name="ounces_abbr">oz</string>
     <string name="pounds_abbr">lb</string>
@@ -125,24 +129,28 @@
     <string name="kilograms_abbr">kg</string>
 
     <!--Temperature-->
-    <string name="degrees_fahrenheit">Degrees Fahrenheit</string>
-    <string name="degrees_celsius">Degrees Celsius</string>
-    <string name="degrees_kelvin">Degrees Kelvin</string>
+    <string-array name="units_temperature">
+        <item>Degrees Fahrenheit</item>
+        <item>Degrees Celsius</item>
+        <item>Degrees Kelvin</item>
+    </string-array>
 
     <string name="degrees_fahrenheit_abbr">°F</string>
     <string name="degrees_celsius_abbr">°C</string>
     <string name="degrees_kelvin_abbr">°K</string>
 
     <!--Volume-->
-    <string name="teaspoons">Teaspoons</string>
-    <string name="tablespoons">Tablespoons</string>
-    <string name="fluid_ounces">Fluid ounces</string>
-    <string name="cups">Cups</string>
-    <string name="pints">Pints</string>
-    <string name="quarts">Quarts</string>
-    <string name="gallons">Gallons</string>
-    <string name="milliliters">Milliliters</string>
-    <string name="liters">Liters</string>
+    <string-array name="units_volume">
+        <item>Teaspoons</item>
+        <item>Tablespoons</item>
+        <item>Fluid ounces</item>
+        <item>Cups</item>
+        <item>Pints</item>
+        <item>Quarts</item>
+        <item>Gallons</item>
+        <item>Milliliters</item>
+        <item>Liters</item>
+    </string-array>
 
     <string name="teaspoons_abbr">tsp</string>
     <string name="tablespoons_abbr">tbsp</string>

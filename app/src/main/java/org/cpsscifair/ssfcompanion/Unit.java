@@ -18,32 +18,36 @@ enum Unit {
 
     static Unit fromString(Resources res, String unitString) {
         if (unitString != null) {
-            // Can't use a switch without using constants
-            if (unitString.equals(res.getString(R.string.inches))) {return INCHES;}
-            if (unitString.equals(res.getString(R.string.feet))) {return FEET;}
-            if (unitString.equals(res.getString(R.string.yards))) {return YARDS;}
-            if (unitString.equals(res.getString(R.string.miles))) {return MILES;}
-            if (unitString.equals(res.getString(R.string.millimeters))) {return MILLIMETERS;}
-            if (unitString.equals(res.getString(R.string.centimeters))) {return CENTIMETERS;}
-            if (unitString.equals(res.getString(R.string.meters))) {return METERS;}
-            if (unitString.equals(res.getString(R.string.kilometers))) {return KILOMETERS;}
-            if (unitString.equals(res.getString(R.string.ounces))) {return OUNCES;}
-            if (unitString.equals(res.getString(R.string.pounds))) {return POUNDS;}
-            if (unitString.equals(res.getString(R.string.milligrams))) {return MILLIGRAMS;}
-            if (unitString.equals(res.getString(R.string.grams))) {return GRAMS;}
-            if (unitString.equals(res.getString(R.string.kilograms))) {return KILOGRAMS;}
-            if (unitString.equals(res.getString(R.string.degrees_fahrenheit))) {return DEGREES_FAHRENHEIT;}
-            if (unitString.equals(res.getString(R.string.degrees_celsius))) {return DEGREES_CELSIUS;}
-            if (unitString.equals(res.getString(R.string.degrees_kelvin))) {return DEGREES_KELVIN;}
-            if (unitString.equals(res.getString(R.string.teaspoons))) {return TEASPOONS;}
-            if (unitString.equals(res.getString(R.string.tablespoons))) {return TABLESPOONS;}
-            if (unitString.equals(res.getString(R.string.fluid_ounces))) {return FLUID_OUNCES;}
-            if (unitString.equals(res.getString(R.string.cups))) {return CUPS;}
-            if (unitString.equals(res.getString(R.string.pints))) {return PINTS;}
-            if (unitString.equals(res.getString(R.string.quarts))) {return QUARTS;}
-            if (unitString.equals(res.getString(R.string.gallons))) {return GALLONS;}
-            if (unitString.equals(res.getString(R.string.milliliters))) {return MILLILITERS;}
-            if (unitString.equals(res.getString(R.string.liters))) {return LITERS;}
+            String[] unitsDistance = res.getStringArray(R.array.units_distance);
+            String[] unitsMass = res.getStringArray(R.array.units_mass);
+            String[] unitsTemperature = res.getStringArray(R.array.units_temperature);
+            String[] unitsVolume = res.getStringArray(R.array.units_volume);
+
+            if (unitString.equals(unitsDistance[0])) {return INCHES;}
+            if (unitString.equals(unitsDistance[1])) {return FEET;}
+            if (unitString.equals(unitsDistance[2])) {return YARDS;}
+            if (unitString.equals(unitsDistance[3])) {return MILES;}
+            if (unitString.equals(unitsDistance[4])) {return MILLIMETERS;}
+            if (unitString.equals(unitsDistance[5])) {return CENTIMETERS;}
+            if (unitString.equals(unitsDistance[6])) {return METERS;}
+            if (unitString.equals(unitsDistance[7])) {return KILOMETERS;}
+            if (unitString.equals(unitsMass[0])) {return OUNCES;}
+            if (unitString.equals(unitsMass[1])) {return POUNDS;}
+            if (unitString.equals(unitsMass[2])) {return MILLIGRAMS;}
+            if (unitString.equals(unitsMass[3])) {return GRAMS;}
+            if (unitString.equals(unitsMass[4])) {return KILOGRAMS;}
+            if (unitString.equals(unitsTemperature[0])) {return DEGREES_FAHRENHEIT;}
+            if (unitString.equals(unitsTemperature[1])) {return DEGREES_CELSIUS;}
+            if (unitString.equals(unitsTemperature[2])) {return DEGREES_KELVIN;}
+            if (unitString.equals(unitsVolume[0])) {return TEASPOONS;}
+            if (unitString.equals(unitsVolume[1])) {return TABLESPOONS;}
+            if (unitString.equals(unitsVolume[2])) {return FLUID_OUNCES;}
+            if (unitString.equals(unitsVolume[3])) {return CUPS;}
+            if (unitString.equals(unitsVolume[4])) {return PINTS;}
+            if (unitString.equals(unitsVolume[5])) {return QUARTS;}
+            if (unitString.equals(unitsVolume[6])) {return GALLONS;}
+            if (unitString.equals(unitsVolume[7])) {return MILLILITERS;}
+            if (unitString.equals(unitsVolume[8])) {return LITERS;}
         }
         return EMPTY_UNIT;
     }
@@ -68,32 +72,37 @@ enum Unit {
     }
 
     String toUpperCaseString(Resources res) {
+        String[] unitsDistance = res.getStringArray(R.array.units_distance);
+        String[] unitsMass = res.getStringArray(R.array.units_mass);
+        String[] unitsTemperature = res.getStringArray(R.array.units_temperature);
+        String[] unitsVolume = res.getStringArray(R.array.units_volume);
+
         switch(this) {
-            case INCHES: return res.getString(R.string.inches);
-            case FEET: return res.getString(R.string.feet);
-            case YARDS: return res.getString(R.string.yards);
-            case MILES: return res.getString(R.string.miles);
-            case MILLIMETERS: return res.getString(R.string.millimeters);
-            case CENTIMETERS: return res.getString(R.string.centimeters);
-            case METERS: return res.getString(R.string.meters);
-            case KILOMETERS: return res.getString(R.string.kilometers);
-            case OUNCES: return res.getString(R.string.ounces);
-            case POUNDS: return res.getString(R.string.pounds);
-            case MILLIGRAMS: return res.getString(R.string.milligrams);
-            case GRAMS: return res.getString(R.string.grams);
-            case KILOGRAMS: return res.getString(R.string.kilograms);
-            case DEGREES_FAHRENHEIT: return res.getString(R.string.degrees_fahrenheit);
-            case DEGREES_CELSIUS: return res.getString(R.string.degrees_celsius);
-            case DEGREES_KELVIN: return res.getString(R.string.degrees_kelvin);
-            case TEASPOONS: return res.getString(R.string.teaspoons);
-            case TABLESPOONS: return res.getString(R.string.tablespoons);
-            case FLUID_OUNCES: return res.getString(R.string.fluid_ounces);
-            case CUPS: return res.getString(R.string.cups);
-            case PINTS: return res.getString(R.string.pints);
-            case QUARTS: return res.getString(R.string.quarts);
-            case GALLONS: return res.getString(R.string.gallons);
-            case MILLILITERS: return res.getString(R.string.milliliters);
-            case LITERS: return res.getString(R.string.liters);
+            case INCHES: return unitsDistance[0];
+            case FEET: return unitsDistance[1];
+            case YARDS: return unitsDistance[2];
+            case MILES: return unitsDistance[3];
+            case MILLIMETERS: return unitsDistance[4];
+            case CENTIMETERS: return unitsDistance[5];
+            case METERS: return unitsDistance[6];
+            case KILOMETERS: return unitsDistance[7];
+            case OUNCES: return unitsMass[0];
+            case POUNDS: return unitsMass[1];
+            case MILLIGRAMS: return unitsMass[2];
+            case GRAMS: return unitsMass[3];
+            case KILOGRAMS: return unitsMass[4];
+            case DEGREES_FAHRENHEIT: return unitsTemperature[0];
+            case DEGREES_CELSIUS: return unitsTemperature[1];
+            case DEGREES_KELVIN: return unitsTemperature[2];
+            case TEASPOONS: return unitsVolume[0];
+            case TABLESPOONS: return unitsVolume[1];
+            case FLUID_OUNCES: return unitsVolume[2];
+            case CUPS: return unitsVolume[3];
+            case PINTS: return unitsVolume[4];
+            case QUARTS: return unitsVolume[5];
+            case GALLONS: return unitsVolume[6];
+            case MILLILITERS: return unitsVolume[7];
+            case LITERS: return unitsVolume[8];
         }
         return null;
     }
