@@ -88,7 +88,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:visibility="invisible"
-                    android:inputType="numberDecimal|numberSigned"
+                    tools:ignore="TextFields"
                     android:textAppearance="@style/TextAppearance.AppCompat.Large"
                     android:id="@+id/edit_text_input" />
 
