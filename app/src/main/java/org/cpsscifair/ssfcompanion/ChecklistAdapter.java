@@ -55,8 +55,8 @@ class ChecklistAdapter extends RecyclerView.Adapter<ChecklistAdapter.ViewHolder>
 
         ViewHolder(View itemView) {
             super(itemView);
-            checkBox = (CheckBox) itemView.findViewById(R.id.checklist_item_check_box);
-            textView = (TextView) itemView.findViewById(R.id.checklist_item_text_view);
+            checkBox = itemView.findViewById(R.id.checklist_item_check_box);
+            textView = itemView.findViewById(R.id.checklist_item_text_view);
         }
     }
 

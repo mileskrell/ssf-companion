@@ -62,7 +62,7 @@ public class EditTextDialogFragment extends DialogFragment {
         builder.setPositiveButton(R.string.okay, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                EditText editText = (EditText) getDialog().findViewById(R.id.dialog_fragment_edit_text);
+                EditText editText = getDialog().findViewById(R.id.dialog_fragment_edit_text);
 
                 ChecklistFragment checklistFragment = (ChecklistFragment) getActivity()
                         .getSupportFragmentManager()
@@ -88,7 +88,7 @@ public class EditTextDialogFragment extends DialogFragment {
         alertDialog.setOnShowListener(new DialogInterface.OnShowListener() {
             @Override
             public void onShow(DialogInterface dialog) {
-                EditText editText = (EditText) ((AlertDialog) dialog).findViewById(R.id.dialog_fragment_edit_text);
+                EditText editText = ((AlertDialog) dialog).findViewById(R.id.dialog_fragment_edit_text);
                 final Button positiveButton = ((AlertDialog) dialog).getButton(DialogInterface.BUTTON_POSITIVE);
 
                 if (savedInstanceState != null) {
@@ -134,7 +134,7 @@ public class EditTextDialogFragment extends DialogFragment {
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        EditText editText = (EditText) getDialog().findViewById(R.id.dialog_fragment_edit_text);
+        EditText editText = getDialog().findViewById(R.id.dialog_fragment_edit_text);
         outState.putString(DIALOG_CURRENT_TEXT, editText.getText().toString());
     }
 }
