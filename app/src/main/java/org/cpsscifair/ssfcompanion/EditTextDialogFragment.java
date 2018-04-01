@@ -100,6 +100,9 @@ public class EditTextDialogFragment extends DialogFragment {
 
                 if (editText.getText().toString().isEmpty()) {
                     positiveButton.setEnabled(false);
+                } else {
+                    // If we're editing an item, move the cursor to the end of the EditText
+                    editText.setSelection(editText.length());
                 }
 
                 editText.addTextChangedListener(new TextWatcher() {
